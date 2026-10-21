@@ -7,6 +7,10 @@ import result6 from '../assets/images/results/result-6.jpeg'
 import result7 from '../assets/images/results/result-7.jpeg'
 import result8 from '../assets/images/results/result-8.jpeg'
 import result9 from '../assets/images/results/result-9.jpeg'
+import result10 from '../assets/images/results/result-10.jpeg'
+import result11 from '../assets/images/results/result-11.png'
+import result12 from '../assets/images/results/result-12.png'
+import result13 from '../assets/images/results/result-13.png'
 
 export type Result = {
   name: string
@@ -14,15 +18,18 @@ export type Result = {
   tag?: string
 }
 
-// Nomes provisórios até a Andreia enviar os nomes reais das alunas.
 export const results: Result[] = [
-  { name: 'Cláudia', image: result1 },
-  { name: 'Mônica', image: result2 },
-  { name: 'Patrícia', image: result3 },
-  { name: 'Lúcia', image: result4 },
+  { name: 'Cristina', image: result1 },
+  { name: 'Lucy', image: result2 },
+  { name: 'Beatriz', image: result3 },
+  { name: 'Joana', image: result4 },
   { name: 'Andreia', image: result5, tag: 'Minha transformação' },
-  { name: 'Marta', image: result6 },
-  { name: 'Sueli', image: result7 },
-  { name: 'Beatriz', image: result8 },
-  { name: 'Fernanda', image: result9 },
+  { name: 'Sônia', image: result6 },
+  { name: 'Maria', image: result7 },
+  { name: 'Lucy', image: result8 },
+  { name: 'Camila', image: result9 },
+  { name: 'Dandara', image: result10 },
+  { name: 'Gisele', image: result11 },
+  { name: 'Kezia', image: result12 },
+  { name: 'Milton', image: result13 },
 ]

@@ -30,9 +30,9 @@ export function Results() {
           className="mt-16 w-full lg:mt-20"
           itemClassName="w-[19rem] sm:w-[22rem] lg:w-[24rem]"
         >
-          {results.map((result) => (
+          {results.map((result, index) => (
             <figure
-              key={result.name}
+              key={`${result.name}-${index}`}
               className="overflow-hidden rounded-2xl border border-black/5 bg-white shadow-[0_10px_30px_rgb(0_0_0/0.06)]"
             >
               <div className="relative">
@@ -53,7 +53,7 @@ export function Results() {
               <figcaption className="flex items-center justify-between gap-4 p-6">
                 <span className="text-lg font-semibold text-neutral-900">{result.name}</span>
                 <span className="text-xs font-medium tracking-widest text-pink uppercase">
-                  {result.tag ?? 'Choque no Metabolismo'}
+                  {result.tag ?? 'Método Nutrideia'}
                 </span>
               </figcaption>
             </figure>
