@@ -3,6 +3,8 @@ import bgHero from '../../assets/images/bg-hero.png'
 import { whatsappHref } from '../../data/navigation'
 import { Button, Container, GlowText, OverlayBackground, RadialGlow } from '../ui'
 
+const heroBadges = ['Dieta feliz', 'Sem passar fome', 'Romanos 12:2']
+
 export function Hero() {
   return (
     <section id="inicio" className="relative isolate flex min-h-svh items-stretch overflow-hidden bg-black">
@@ -32,12 +34,26 @@ export function Hero() {
           </Button>
         </div>
 
-        <div className="flex justify-center self-end lg:justify-end">
+        <div className="relative flex justify-center self-end lg:justify-end">
           <img
             src={andreiaHero}
             alt="Andreia, nutricionista"
-            className="h-auto w-full lg:w-[104%] max-w-md lg:max-w-[720px] max-sm:w-[112%] max-sm:max-w-none"
+            className="h-auto w-full lg:w-[107%] max-w-md lg:max-w-[720px] max-sm:w-[112%] max-sm:max-w-none lg:translate-x-6"
           />
+          <ul className="absolute top-[44%] right-1 z-10 flex flex-col items-end gap-1.5 sm:gap-2.5 lg:top-[42%] lg:-right-4">
+            {heroBadges.map((badge, index) => (
+              <li
+                key={badge}
+                className="animate-badge-float motion-reduce:animate-none whitespace-nowrap rounded-full border border-[#7a7a7a] bg-[#575656] px-2.5 py-1 text-[9px] font-semibold tracking-[0.08em] text-white uppercase inset-shadow-[0_2px_8px_rgb(255_255_255/0.28)] shadow-[0_6px_16px_rgb(0_0_0/0.35)] sm:px-4 sm:py-1.5 sm:text-xs sm:tracking-[0.14em]"
+                style={{
+                  marginRight: index === 1 ? '0.55rem' : 0,
+                  animationDelay: `${index * 0.35}s`,
+                }}
+              >
+                {badge}
+              </li>
+            ))}
+          </ul>
         </div>
       </Container>
     </section>
