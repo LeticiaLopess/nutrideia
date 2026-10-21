@@ -1,32 +1,60 @@
+import type { ReactNode } from 'react'
 import { testimonials, type Testimonial } from '../../data/testimonials'
+import { cn } from '../../lib/cn'
 import { Badge, Carousel, Container, GlowText, ScriptText, Section } from '../ui'
 
 const topRow = testimonials.filter((_, index) => index % 2 === 0)
 const bottomRow = testimonials.filter((_, index) => index % 2 === 1)
 
-export function Testimonials() {
+type TestimonialsProps = {
+  description?: ReactNode
+  descriptionClassName?: string
+  className?: string
+  /** Choque usa tipografia bold italic em vez da script cursiva */
+  accent?: 'script' | 'shock'
+}
+
+export function Testimonials({
+  description,
+  descriptionClassName,
+  className = 'bg-[#eef0f2]',
+  accent = 'script',
+}: TestimonialsProps) {
   return (
-    <Section id="depoimentos" className="bg-[#eef0f2] pt-4 lg:pt-8">
+    <Section id="depoimentos" className={cn('pt-4 lg:pt-8', className)}>
       <Container className="flex flex-col items-center">
-        <div className="flex max-w-3xl flex-col items-center text-center">
+        <div className="flex max-w-3xl mt-20 flex-col items-center text-center">
           <Badge>Depoimentos</Badge>
 
-          <h2 className="mt-6 text-3xl leading-tight font-medium text-neutral-900 sm:text-4xl lg:text-[2.75rem]">
+          <h2 className="mt-6 text-3xl leading-none font-medium text-neutral-900 sm:text-4xl lg:text-[2.75rem]">
             <span className="font-semibold text-pink">+10.000</span> mulheres pelo mundo já viveram
             essa{' '}
-            <GlowText
-              animated={false}
-              className="font-display mt-1 text-[1.3em] leading-none font-normal [text-shadow:0_0_18px_rgb(230_0_126/0.25)]!"
-            >
-              <ScriptText>transformação.</ScriptText>
-            </GlowText>
+            {accent === 'shock' ? (
+              <span className="font-black uppercase italic">transformação.</span>
+            ) : (
+              <GlowText
+                animated={false}
+                className="font-display mt-1 text-[1.3em] leading-none font-normal [text-shadow:0_0_18px_rgb(var(--glow-rgb)/0.25)]!"
+              >
+                <ScriptText>transformação.</ScriptText>
+              </GlowText>
+            )}
           </h2>
 
-          <p className="mt-8 max-w-2xl text-base leading-[1.6] text-neutral-600 lg:text-lg">
-            O método que você está prestes a conhecer já foi{' '}
-            <strong className="font-semibold text-neutral-900">colocado à prova e aprovado</strong> por
-            mais de 10 mil alunas em todo o mundo. Mas não precisa acreditar só em mim:{' '}
-            <span className="font-semibold text-pink">veja o que elas têm a dizer.</span>
+          <p
+            className={cn(
+              'mt-8 text-base leading-[1.6] text-neutral-600 lg:text-lg',
+              descriptionClassName ?? 'max-w-2xl',
+            )}
+          >
+            {description ?? (
+              <>
+                O método que você está prestes a conhecer já foi{' '}
+                <strong className="font-semibold text-neutral-900">colocado à prova e aprovado</strong>{' '}
+                por mais de 10 mil alunas em todo o mundo. Mas não precisa acreditar só em mim:{' '}
+                <span className="font-semibold text-pink">veja o que elas têm a dizer.</span>
+              </>
+            )}
           </p>
         </div>
       </Container>

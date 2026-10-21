@@ -39,7 +39,10 @@ export function ScriptText({ children }: ScriptTextProps) {
   return (
     <>
       <span className="sr-only">{children}</span>
-      <span aria-hidden="true">
+      <span aria-hidden="true" className="script-plain">
+        {children}
+      </span>
+      <span aria-hidden="true" className="script-composed">
         {segments.map((segment, index) =>
           typeof segment === 'string' ? (
             segment

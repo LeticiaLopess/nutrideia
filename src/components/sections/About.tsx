@@ -1,4 +1,5 @@
 import andreiaAbout from '../../assets/images/andreia-about.jpg'
+import { whatsappHref } from '../../data/navigation'
 import {
   Badge,
   Button,
@@ -57,8 +58,9 @@ export function About() {
             </p>
           </div>
 
-          <Button href="#contato" className="mt-10">
-            Quero começar minha transformação
+          <Button href={whatsappHref} size="lg" className="mt-10 max-sm:w-full max-sm:text-[15px]">
+            <span className="sm:hidden">Quero emagrecer</span>
+            <span className="max-sm:hidden">Quero começar minha transformação</span>
           </Button>
         </div>
 

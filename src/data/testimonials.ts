@@ -31,13 +31,13 @@ export const testimonials: Testimonial[] = [
   {
     name: 'Jacqueline Rios',
     source: 'google',
-    text: 'São muitas as qualidades desta nutricionista, Andreia Borges, mas vou começar apresentando os meus resultados: emagreci 16 quilos, sem passar fome e comendo, com prazer, quitutes muito saborosos. Estou vencendo os obstáculos do ato de cozinhar e praticar treino de musculação, pois é contagiante e inspirador ver esta nutricionista oferecendo-me o exemplo prático.',
+    text: 'São muitas as qualidades desta nutricionista, Andreia Oliveira, mas vou começar apresentando os meus resultados: emagreci 16 quilos, sem passar fome e comendo, com prazer, quitutes muito saborosos. Estou vencendo os obstáculos do ato de cozinhar e praticar treino de musculação, pois é contagiante e inspirador ver esta nutricionista oferecendo-me o exemplo prático.',
   },
   {
     name: 'Ingrid Reis',
     avatar: ingridReis,
     source: 'google',
-    text: 'A Dra. Andreia Borges faz toda a diferença na minha vida alimentar. Explicou detalhadamente todos os passos para uma autoconscientização de como ter qualidade de vida, em uma dieta que nem parece dieta, e me faz muito feliz, plena, radiante e amar o que eu vejo no espelho diariamente. Vale super a pena essa mega power nutri que me fez resgatar a saúde e a autoestima!',
+    text: 'A Dra. Andreia Oliveira faz toda a diferença na minha vida alimentar. Explicou detalhadamente todos os passos para uma autoconscientização de como ter qualidade de vida, em uma dieta que nem parece dieta, e me faz muito feliz, plena, radiante e amar o que eu vejo no espelho diariamente. Vale super a pena essa mega power nutri que me fez resgatar a saúde e a autoestima!',
   },
   {
     name: 'Flavia Ribeiro',
@@ -65,7 +65,7 @@ export const testimonials: Testimonial[] = [
     name: 'Edsandra Jinkings',
     avatar: edsandraJinkings,
     source: 'google',
-    text: 'Há três meses fiz o primeiro contato com a Dra. Andreia Borges, nutricionista e terapeuta, depois de tantas tentativas para emagrecer. Acredito que tudo é no tempo de Deus e esse tempo chegou: estou emagrecendo de forma saudável e sem sofrimento, já foram mais de 14 quilos eliminados, com muita saúde e a autoestima lá em cima. Obrigada, Andreia, por este método inovador!',
+    text: 'Há três meses fiz o primeiro contato com a Dra. Andreia Oliveira, nutricionista e terapeuta, depois de tantas tentativas para emagrecer. Acredito que tudo é no tempo de Deus e esse tempo chegou: estou emagrecendo de forma saudável e sem sofrimento, já foram mais de 14 quilos eliminados, com muita saúde e a autoestima lá em cima. Obrigada, Andreia, por este método inovador!',
   },
   {
     name: 'Isis Pessanha',
@@ -77,7 +77,7 @@ export const testimonials: Testimonial[] = [
     name: 'Carlos Agostinho',
     avatar: carlosAgostinho,
     source: 'google',
-    text: 'Excelente profissional! Excelentes as orientações, que sempre dão excelentes resultados. As técnicas aplicadas sem sofrimento, resolvendo muitos problemas como diabetes, psoríase e uma gama enorme de soluções. Muita gratidão à Dra. Andreia Borges. Recomendo, com todas as garantias.',
+    text: 'Excelente profissional! Excelentes as orientações, que sempre dão excelentes resultados. As técnicas aplicadas sem sofrimento, resolvendo muitos problemas como diabetes, psoríase e uma gama enorme de soluções. Muita gratidão à Dra. Andreia Oliveira. Recomendo, com todas as garantias.',
   },
   {
     name: 'Juliana Lyra',

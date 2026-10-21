@@ -10,7 +10,7 @@ export function FramedImage({ wrapperClassName, className, alt, ...props }: Fram
     <div className={cn('relative isolate', wrapperClassName)}>
       <div
         aria-hidden="true"
-        className="absolute -top-6 -right-6 -z-10 size-28 rounded-2xl bg-pink shadow-[0_0_40px_rgb(230_0_126/0.35)] lg:-top-8 lg:-right-8 lg:size-36"
+        className="absolute -top-4 -right-4 -z-10 size-28 rounded-2xl bg-pink shadow-[0_0_40px_rgb(var(--glow-rgb)/0.35)] lg:-top-5 lg:-right-5 lg:size-36"
       />
       <img
         alt={alt}

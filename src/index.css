@@ -8,9 +8,21 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Aretha Bridge';
+  src:
+    url('./assets/fonts/Aretha Bridge.otf') format('opentype'),
+    url('./assets/fonts/Aretha Bridge.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   --color-pink: #e6007e;
+  --color-cta: #e6007e;
   --color-graphite: #575756;
+  --color-cozinha-brown: #59483d;
 
   --font-sans: 'Montserrat', 'Segoe UI', system-ui, sans-serif;
   --font-display: 'Right Female', cursive;
@@ -32,17 +44,25 @@
     100% {
       opacity: 1;
       text-shadow:
-        0 0 6px rgb(230 0 126 / 0.9),
-        0 0 18px rgb(230 0 126 / 0.7),
-        0 0 40px rgb(230 0 126 / 0.5);
+        0 0 6px rgb(var(--glow-rgb) / 0.9),
+        0 0 18px rgb(var(--glow-rgb) / 0.7),
+        0 0 40px rgb(var(--glow-rgb) / 0.5);
     }
     50% {
       opacity: 0.55;
       text-shadow:
-        0 0 2px rgb(230 0 126 / 0.3),
-        0 0 6px rgb(230 0 126 / 0.2);
+        0 0 2px rgb(var(--glow-rgb) / 0.3),
+        0 0 6px rgb(var(--glow-rgb) / 0.2);
     }
   }
+}
+
+@utility bg-gingham {
+  background-color: #f7efe7;
+  background-image:
+    linear-gradient(90deg, rgb(164 11 38 / 0.45) 50%, transparent 50%),
+    linear-gradient(rgb(164 11 38 / 0.45) 50%, transparent 50%);
+  background-size: 26px 26px;
 }
 
 @utility overlay-fade-y {
@@ -59,7 +79,142 @@
     linear-gradient(rgb(110 0 60 / 0.18), rgb(110 0 60 / 0.18));
 }
 
+:root {
+  --glow-rgb: 230 0 126;
+  --cta-rgb: 230 0 126;
+}
+
+.script-plain {
+  display: none;
+}
+
+.theme-cozinha .script-plain {
+  display: inline;
+}
+
+.theme-cozinha .script-composed {
+  display: none;
+}
+
+.theme-cozinha {
+  --font-display: 'Yellowtail', cursive;
+  --color-pink: #e6c5aa;
+  --glow-rgb: 230 197 170;
+  --color-cta: #a40b26;
+  --cta-rgb: 164 11 38;
+}
+
+.theme-cozinha-light {
+  --color-pink: #a40b26;
+  --glow-rgb: 164 11 38;
+}
+
+.theme-choque {
+  --color-pink: #000000;
+  --glow-rgb: 252 232 242;
+  --color-cta: #000000;
+  --cta-rgb: 0 0 0;
+}
+
+.badge {
+  color: var(--color-pink);
+}
+
+.badge-underline {
+  height: 8px;
+  opacity: 0.5;
+  background-image:
+    repeating-linear-gradient(90deg, currentColor 0 1px, transparent 1px 24px),
+    repeating-linear-gradient(90deg, currentColor 0 1px, transparent 1px 6px);
+  background-size: 100% 8px, 100% 4px;
+  background-position: left bottom;
+  background-repeat: no-repeat;
+}
+
+.theme-choque .badge-underline {
+  height: 14px;
+  opacity: 1;
+  background-image: none;
+  background-color: currentColor;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='14' viewBox='0 0 48 14' fill='none'%3E%3Cpath d='M0 7 L5 3 L10 11 L15 2 L20 12 L25 3 L30 11 L35 2 L40 10 L45 4 L48 7' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M8 5 L9.5 7.5 L11 5' stroke='black' stroke-width='1' stroke-linecap='round' opacity='0.7'/%3E%3Cpath d='M28 4 L29.5 7 L31 4' stroke='black' stroke-width='1' stroke-linecap='round' opacity='0.7'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='14' viewBox='0 0 48 14' fill='none'%3E%3Cpath d='M0 7 L5 3 L10 11 L15 2 L20 12 L25 3 L30 11 L35 2 L40 10 L45 4 L48 7' stroke='black' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M8 5 L9.5 7.5 L11 5' stroke='black' stroke-width='1' stroke-linecap='round' opacity='0.7'/%3E%3Cpath d='M28 4 L29.5 7 L31 4' stroke='black' stroke-width='1' stroke-linecap='round' opacity='0.7'/%3E%3C/svg%3E");
+  -webkit-mask-size: 48px 14px;
+  mask-size: 48px 14px;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: repeat-x;
+  mask-repeat: repeat-x;
+  filter: drop-shadow(0 0 2px rgb(252 232 242 / 0.9)) drop-shadow(0 0 6px rgb(252 232 242 / 0.7));
+  animation: shock-bolt 0.7s ease-in-out infinite;
+}
+
+@keyframes shock-bolt {
+  0%,
+  100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 2px rgb(252 232 242 / 0.95)) drop-shadow(0 0 8px rgb(252 232 242 / 0.75))
+      drop-shadow(0 0 14px rgb(0 0 0 / 0.25));
+    transform: translateX(0);
+  }
+  25% {
+    opacity: 0.55;
+    filter: drop-shadow(0 0 1px rgb(252 232 242 / 0.4)) drop-shadow(0 0 3px rgb(252 232 242 / 0.3));
+    transform: translateX(0.5px);
+  }
+  40% {
+    opacity: 1;
+    filter: drop-shadow(0 0 3px rgb(255 255 255 / 0.95)) drop-shadow(0 0 10px rgb(252 232 242 / 0.9))
+      drop-shadow(0 0 18px rgb(252 232 242 / 0.55));
+    transform: translateX(-0.5px);
+  }
+  70% {
+    opacity: 0.7;
+    filter: drop-shadow(0 0 2px rgb(252 232 242 / 0.6)) drop-shadow(0 0 5px rgb(252 232 242 / 0.45));
+    transform: translateX(0.25px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-choque .badge-underline {
+    animation: none;
+  }
+}
+
+.theme-terapia .script-plain {
+  display: inline;
+}
+
+.theme-terapia .script-composed {
+  display: none;
+}
+
+.theme-terapia .font-display {
+  -webkit-text-stroke: 0.025em currentColor;
+}
+
+.theme-terapia {
+  --font-display: 'Aretha Bridge', cursive;
+  --color-pink: #e6007e;
+  --glow-rgb: 230 0 126;
+  --color-cta: #e6007e;
+  --cta-rgb: 230 0 126;
+}
+
 @layer base {
+  html.theme-cozinha {
+    background-color: #141414;
+  }
+
+  html.theme-choque {
+    background-color: #fdfaf0;
+    color: #000000;
+  }
+
+  html.theme-terapia {
+    background-color: #f2f2ef;
+    color: #060606;
+  }
+
   html {
     @apply scroll-smooth scroll-pt-20 bg-black font-sans text-white antialiased;
   }

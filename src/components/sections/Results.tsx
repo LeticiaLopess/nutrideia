@@ -1,3 +1,4 @@
+import { whatsappHref } from '../../data/navigation'
 import { results } from '../../data/results'
 import { Badge, Button, Carousel, Container, GlowText, Section } from '../ui'
 
@@ -12,7 +13,7 @@ export function Results() {
             Mulheres que{' '}
             <GlowText
               animated={false}
-              className="font-display mt-1 text-[1.3em] leading-none font-normal [text-shadow:0_0_18px_rgb(230_0_126/0.25)]!"
+              className="font-display mt-1 text-[1.3em] leading-none font-normal [text-shadow:0_0_18px_rgb(var(--glow-rgb)/0.25)]!"
             >
               renovaram a mente.
             </GlowText>
@@ -59,7 +60,7 @@ export function Results() {
           ))}
         </Carousel>
 
-        <Button href="#contato" size="lg" className="mt-14">
+        <Button href={whatsappHref} size="lg" className="mt-14 max-sm:w-full max-sm:text-[15px]">
           Quero ser a próxima
         </Button>
       </Container>

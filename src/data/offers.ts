@@ -10,6 +10,7 @@ export type Offer = {
   benefits: string[]
   cta: string
   href: string
+  checkoutHref: string
   featured?: boolean
   image?: string
   price: number
@@ -26,13 +27,14 @@ export const offers: Offer[] = [
     description:
       'Aqui eu te ensino a fazer em casa as nutrideias: versões proteicas das receitas que você ama, com sabor, textura e prazer de verdade, para emagrecer sem comer igual a um passarinho.',
     benefits: [
-      'Bolo de chocolate, bolo mesclado e outros bolos',
-      'Pão pra Secar e pão de passas com canela',
-      'Creme de avelã proteico e Potinhos da Felicidade',
-      'Biscoito Divo, rabanada e muito mais',
+      'Bolo de chocolate, mesclado e outros',
+      'Diversos tipos de pães',
+      'Creme de avelã proteico e potinhos da felicidade',
+      'Biscoito divo, rabanada e muito mais',
     ],
     cta: 'Quero as receitas',
-    href: '#',
+    href: '/cozinha-nutrideia/',
+    checkoutHref: 'https://pay.kiwify.com.br/TEZXaMi',
   },
   {
     name: 'Terapia do Emagrecimento',
@@ -50,7 +52,9 @@ export const offers: Offer[] = [
       'Ajustes no seu ritmo, a cada etapa do processo',
     ],
     cta: 'Quero a terapia',
-    href: '#',
+    href: '/terapia-emagrecimento/',
+    checkoutHref:
+      'https://wa.me/5521975719527?text=Ol%C3%A1%2C%20estava%20no%20site%20e%20queria%20saber%20mais%20sobre%20o%20Terapia%20do%20Emagrecimento.',
     featured: true,
   },
   {
@@ -60,14 +64,15 @@ export const offers: Offer[] = [
     format: 'Jornada em grupo',
     tagline: 'Quem participa, sempre volta.',
     description:
-      'Serão 30 dias de autocuidado, onde eu aplico os mesmos métodos que utilizei para mudar a vida de milhares de pessoas, ajudando-as a vencer a obesidade e problemas de saúde através da mudança de hábitos alimentares e de saúde.',
+      'Serão 21 dias de autocuidado, onde eu aplico os mesmos métodos que utilizei para mudar a vida de milhares de pessoas, ajudando-as a vencer a obesidade e problemas de saúde através da mudança de hábitos alimentares e de saúde.',
     benefits: [
-      '30 dias de autocuidado guiados por mim',
+      '21 dias de autocuidado guiados por mim',
       'Sucesso comprovado desde 2017, edição após edição',
       'O Método Nutrideia e a renovação da mente, passo a passo',
       'Um grupo fiel de mulheres caminhando lado a lado com você',
     ],
     cta: 'Quero participar',
-    href: '#',
+    href: '/choque-metabolismo/',
+    checkoutHref: 'https://pay.kiwify.com.br/i5LxbP2',
   },
 ]

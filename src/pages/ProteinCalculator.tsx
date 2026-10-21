@@ -62,7 +62,7 @@ export function ProteinCalculator() {
               Sua cota diária
             </p>
 
-            <p className="mt-3 text-6xl leading-none font-semibold text-pink [text-shadow:0_0_24px_rgb(230_0_126/0.5)]">
+            <p className="mt-3 text-6xl leading-none font-semibold text-pink [text-shadow:0_0_24px_rgb(var(--glow-rgb)/0.5)]">
               {protein === null ? '—' : formatNumber(protein)}
               <span className="ml-2 text-2xl text-neutral-300 [text-shadow:none]">g</span>
             </p>

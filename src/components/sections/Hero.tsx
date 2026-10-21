@@ -1,5 +1,6 @@
 import andreiaHero from '../../assets/images/andreia-hero.png'
 import bgHero from '../../assets/images/bg-hero.png'
+import { whatsappHref } from '../../data/navigation'
 import { Button, Container, GlowText, OverlayBackground, RadialGlow } from '../ui'
 
 export function Hero() {
@@ -25,8 +26,9 @@ export function Hero() {
             peso sem abrir mão do que você ama.
           </p>
 
-          <Button href="#contato" size="lg" className="mt-12">
-            Quero aprender a emagrecer
+          <Button href={whatsappHref} size="lg" className="mt-12 max-sm:w-full max-sm:text-[15px]">
+            <span className="sm:hidden">Quero emagrecer</span>
+            <span className="max-sm:hidden">Quero aprender a emagrecer</span>
           </Button>
         </div>
 
@@ -34,7 +36,7 @@ export function Hero() {
           <img
             src={andreiaHero}
             alt="Andreia, nutricionista"
-            className="h-auto w-full lg:w-[104%] max-w-md lg:max-w-[720px]"
+            className="h-auto w-full lg:w-[104%] max-w-md lg:max-w-[720px] max-sm:w-[112%] max-sm:max-w-none"
           />
         </div>
       </Container>

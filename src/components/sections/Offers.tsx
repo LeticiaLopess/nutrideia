@@ -4,7 +4,7 @@ import { Badge, Button, Container, GlowText, RadialGlow, ScriptText, Section } f
 
 export function Offers() {
   return (
-    <Section id="contato" className="bg-[#101010]">
+    <Section id="comece-agora" className="bg-[#101010]">
       <RadialGlow className="-top-80 left-1/2 -z-10 size-240 -translate-x-1/2" />
 
       <Container className="flex flex-col items-center">
@@ -30,9 +30,9 @@ export function Offers() {
             <article
               key={offer.name}
               className={cn(
-                'relative flex flex-col rounded-2xl border p-8 sm:p-10',
+                'relative flex flex-col rounded-2xl border p-6 sm:p-10',
                 offer.featured
-                  ? 'border-pink/60 bg-pink/[0.07] shadow-[0_0_60px_rgb(230_0_126/0.15)]'
+                  ? 'border-pink/60 bg-pink/[0.07] shadow-[0_0_60px_rgb(var(--glow-rgb)/0.15)]'
                   : 'border-white/10 bg-white/3',
               )}
             >
@@ -87,7 +87,7 @@ export function Offers() {
                 <p className="text-xs font-medium tracking-widest text-neutral-400 uppercase">
                   Investimento
                 </p>
-                <p className="mt-2 text-[40xpx] font-semibold text-white">
+                <p className="mt-2 text-[2.5rem] leading-none sm:text-[2.75rem] font-semibold text-white">
                   {offer.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
                 </p>
                 {offer.priceNote && (
@@ -96,8 +96,9 @@ export function Offers() {
               </div>
 
               <Button
-                href={offer.href}
+                href={offer.checkoutHref}
                 variant={offer.featured ? 'primary' : 'outline'}
+                size="lg"
                 className="w-full"
               >
                 {offer.cta}

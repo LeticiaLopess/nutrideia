@@ -24,17 +24,17 @@ const base =
 
 const variants: Record<Variant, string> = {
   primary:
-    'bg-pink text-white inset-shadow-[0_2px_8px_rgb(255_255_255/0.22)] shadow-[0_0_24px_rgb(230_0_126/0.45)] hover:-translate-y-0.5 hover:shadow-[0_0_36px_rgb(230_0_126/0.7)]',
-  solid: 'bg-pink text-white inset-shadow-[0_2px_8px_rgb(255_255_255/0.22)] hover:bg-pink/85',
+    'bg-cta text-white inset-shadow-[0_2px_8px_rgb(255_255_255/0.22)] shadow-[0_0_24px_rgb(var(--cta-rgb)/0.45)] hover:-translate-y-0.5 hover:shadow-[0_0_36px_rgb(var(--cta-rgb)/0.7)]',
+  solid: 'bg-cta text-white inset-shadow-[0_2px_8px_rgb(255_255_255/0.22)] hover:bg-cta/85',
   outline:
     'border border-pink text-pink hover:bg-pink hover:text-white',
   ghost: 'text-white hover:text-pink',
 }
 
 const sizes: Record<Size, string> = {
-  sm: 'px-6 py-2.5 text-sm',
-  md: 'px-7 py-3 text-base',
-  lg: 'px-9 py-3.5 text-lg',
+  sm: 'h-10 px-6 text-sm',
+  md: 'h-12 px-7 text-base',
+  lg: 'h-12 px-9 text-base',
 }
 
 export function Button({
@@ -47,8 +47,20 @@ export function Button({
   const classes = cn(base, variants[variant], sizes[size], className)
 
   if (props.href !== undefined) {
+    const linkProps = props as AnchorHTMLAttributes<HTMLAnchorElement>
+    const isExternal = /^https?:\/\//i.test(linkProps.href ?? '')
+
     return (
-      <a className={classes} {...(props as AnchorHTMLAttributes<HTMLAnchorElement>)}>
+      <a
+        className={classes}
+        {...linkProps}
+        {...(isExternal
+          ? {
+              target: linkProps.target ?? '_blank',
+              rel: linkProps.rel ?? 'noopener noreferrer',
+            }
+          : null)}
+      >
         {children}
       </a>
     )

@@ -1,6 +1,7 @@
 import { Header } from './components/layout/Header'
 import { About } from './components/sections/About'
 import { Challenge } from './components/sections/Challenge'
+import { FaithFoundation } from './components/sections/FaithFoundation'
 import { Hero } from './components/sections/Hero'
 import { MetabolismShock } from './components/sections/MetabolismShock'
 import { Method } from './components/sections/Method'
@@ -22,6 +23,7 @@ function App() {
         <Quote />
         <MetabolismShock />
         <Method />
+        <FaithFoundation variant="home" />
         <TapeDivider />
         <Results />
         <Testimonials />

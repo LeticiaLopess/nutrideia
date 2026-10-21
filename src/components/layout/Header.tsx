@@ -45,7 +45,7 @@ export function Header() {
           href={navCta.href}
           variant="solid"
           size="sm"
-          className="hidden justify-self-end lg:inline-flex"
+          className="justify-self-end max-lg:hidden"
         >
           {navCta.label}
         </Button>

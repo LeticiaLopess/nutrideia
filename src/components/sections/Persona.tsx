@@ -1,5 +1,6 @@
 import personaSectionLg from '../../assets/images/persona-section-lg.png'
 import personaSection from '../../assets/images/persona-section.png'
+import { whatsappHref } from '../../data/navigation'
 import { personaPains } from '../../data/persona'
 import { Badge, Button, Container, GlowText, ScriptText, Section } from '../ui'
 
@@ -24,7 +25,7 @@ export function Persona() {
             Cansada de dieta restritiva e comida{' '}
             <GlowText
               animated={false}
-              className="font-display mt-1 text-[1.3em] leading-none font-normal [text-shadow:0_0_18px_rgb(230_0_126/0.25)]!"
+              className="font-display mt-1 text-[1.3em] leading-none font-normal [text-shadow:0_0_18px_rgb(var(--glow-rgb)/0.25)]!"
             >
               <ScriptText>sem graça?</ScriptText>
             </GlowText>
@@ -68,8 +69,9 @@ export function Persona() {
             para você.
           </p>
 
-          <Button href="#choque-no-metabolismo" className="mt-10">
-            Quero acordar meu metabolismo
+          <Button href={whatsappHref} size="lg" className="mt-10 max-sm:w-full max-sm:text-[15px]">
+            <span className="sm:hidden">Quero emagrecer</span>
+            <span className="max-sm:hidden">Quero acordar meu metabolismo</span>
           </Button>
         </div>
       </Container>

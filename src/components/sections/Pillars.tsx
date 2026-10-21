@@ -31,11 +31,11 @@ export function Pillars() {
                 0
               </span>
 
-              <span className="flex size-11 items-center justify-center rounded-full border border-pink/10 bg-pink/10 text-pink shadow-[0_0_20px_rgb(230_0_126/0.25)]">
+              <span className="flex size-11 items-center justify-center rounded-full border border-pink/10 bg-pink/10 text-pink shadow-[0_0_20px_rgb(var(--glow-rgb)/0.25)]">
                 <LineIcon name={pillar.icon} className="size-5 opacity-90" />
               </span>
 
-              <h3 className="mt-7 text-xl font-semibold tracking-[0.2em] text-white uppercase">
+              <h3 className="mt-7 text-lg font-semibold tracking-[0.12em] text-white uppercase sm:text-xl sm:tracking-[0.2em]">
                 {pillar.title}
               </h3>
               <p className="mt-4 text-base leading-[1.6] text-neutral-400">{pillar.description}</p>
