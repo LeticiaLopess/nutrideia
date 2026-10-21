@@ -25,6 +25,16 @@ const product = offers.find((offer) => offer.name === 'Cozinha Nutrideia')!
 
 const formattedPrice = product.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
 
+const recipes = [
+  'Arroz doce low carb',
+  'Beijinho sem açúcar proteico',
+  'Panna cotta com geleia de frutas vermelhas',
+  'Kibe low carb',
+  'Pão francês, baguete e pão de gergelim',
+  'Pão de passas com canela',
+  'Pizza e hambúrguer low carb',
+]
+
 const pains = [
   'Achar que depois de uma certa idade não dá mais para emagrecer',
   'Viver de frango com salada e chamar isso de dieta',
@@ -145,12 +155,12 @@ function Hero() {
     <section className="relative isolate flex overflow-hidden bg-[#141414] pt-32 lg:min-h-svh lg:pt-20">
       <RadialGlow className="-top-[30rem] -left-[20rem] -z-10 size-[60rem]" />
 
-      <div className="pointer-events-none absolute top-[calc(7%+45px)] right-0 bottom-0 z-0 hidden w-[44%] lg:block">
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-0 hidden w-[44%] lg:block">
         <img
           src={andreiaEating}
           alt=""
           aria-hidden="true"
-          className="absolute inset-0 size-full object-cover object-[58%_center] [mask-image:linear-gradient(90deg,transparent_0%,rgba(0,0,0,0.25)_10%,#000_32%,#000_100%)] [-webkit-mask-image:linear-gradient(90deg,transparent_0%,rgba(0,0,0,0.25)_10%,#000_32%,#000_100%)]"
+          className="absolute inset-0 size-full object-cover object-[58%_top] [mask-image:linear-gradient(90deg,transparent_0%,rgba(0,0,0,0.25)_10%,#000_32%,#000_100%)] [-webkit-mask-image:linear-gradient(90deg,transparent_0%,rgba(0,0,0,0.25)_10%,#000_32%,#000_100%)]"
         />
         <span
           aria-hidden="true"
@@ -319,9 +329,9 @@ function Menu() {
             </h2>
 
             <ul className="mt-12 flex flex-col gap-6 text-left">
-              {product.benefits.map((benefit) => (
-                <li key={benefit} className="flex items-end gap-3 text-base text-neutral-200 sm:text-lg">
-                  <span>{benefit}</span>
+              {recipes.map((recipe) => (
+                <li key={recipe} className="flex items-end gap-3 text-base text-neutral-200 sm:text-lg">
+                  <span>{recipe}</span>
                   <span aria-hidden="true" className="mb-1.5 min-w-6 flex-1 border-b-2 border-dotted border-pink/30" />
                   <LineIcon name="heart" className="mb-0.5 size-5 shrink-0 text-pink" />
                 </li>
@@ -334,9 +344,12 @@ function Menu() {
                   Bônus
                 </p>
                 <p className="mt-2 text-base leading-[1.45] text-white sm:text-lg">
-                  De presente, você ainda leva o{' '}
-                  <strong className="font-semibold text-white">Pão pra secar</strong> — a receita
-                  queridinha pra quem quer emagrecer sem abrir mão do pão.
+                  De presente, você ainda leva as receitas oficiais do delivery:{' '}
+                  <strong className="font-semibold text-white">
+                    Pão pra secar, bolo de chocolate, mesclado, paçoca, biscoito divo, creme de avelã
+                    e etc
+                  </strong>
+                  .
                 </p>
               </aside>
 
@@ -354,15 +367,15 @@ function Menu() {
                 </p>
                 <p className="relative mt-2 text-base leading-[1.45] text-white sm:text-lg">
                   De presente, você ainda leva{' '}
-                  <strong className="font-semibold text-white">receitas natalinas</strong> pra ceia
-                  com cara de festa — e sabor que cabe na sua meta de secar.
+                  <strong className="font-semibold text-white">receitas natalinas</strong>, como
+                  rabanada e doce de leite proteico, pra ceia com cara de festa.
                 </p>
               </aside>
             </div>
 
             <p className="mt-8 text-sm text-neutral-400">
-              Doce, pão e bolo de volta no seu prato, em versão proteica. Sem culpa, sem compulsão,
-              sem recomeçar na segunda.
+              Doce, pão, lanche e prato salgado em versão low carb e proteica. Sem culpa, sem
+              compulsão, sem recomeçar na segunda.
             </p>
           </div>
         </div>
@@ -523,7 +536,7 @@ function Pricing() {
               {formattedPrice}
             </p>
             <p className="mt-3 text-sm text-neutral-400">
-              Menos do que as dietas que já falharam.
+              Pagamento único. Acesso imediato.
             </p>
 
             <Button href={product.checkoutHref} size="lg" className="mt-8 w-full max-sm:text-[15px]">

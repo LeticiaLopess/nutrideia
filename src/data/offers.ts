@@ -27,10 +27,10 @@ export const offers: Offer[] = [
     description:
       'Aqui eu te ensino a fazer em casa as nutrideias: versões proteicas das receitas que você ama, com sabor, textura e prazer de verdade, para emagrecer sem comer igual a um passarinho.',
     benefits: [
-      'Bolo de chocolate, mesclado e outros',
-      'Diversos tipos de pães',
-      'Creme de avelã proteico e potinhos da felicidade',
-      'Biscoito divo, rabanada e muito mais',
+      'Doces e sobremesas proteicas para o dia a dia',
+      'Pães, pizza e hambúrguer em versão low carb',
+      'Pratos salgados para almoço e jantar',
+      'Bônus de receitas do delivery e natalinas',
     ],
     cta: 'Quero as receitas',
     href: '/cozinha-nutrideia/',
