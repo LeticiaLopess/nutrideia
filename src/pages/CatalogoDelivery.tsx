@@ -1,14 +1,17 @@
 import { useEffect, useMemo, useState } from 'react'
-import andreiaBrownie from '../assets/images/andreia-brownie.jpg'
+import andreiaHistory from '../assets/images/andreia-history.jpeg'
 import logo from '../assets/images/logo.png'
 import { Badge, Button, Container, LineIcon, ScriptText, Section } from '../components/ui'
 import {
   cakeMacrosNote,
+  cartLineTotal,
+  cartTotal,
   deliveryCartWhatsappHref,
   deliveryCategories,
   deliveryInstagramHandle,
   deliveryInstagramHref,
   deliveryProducts,
+  formatBRL,
   formatGrams,
   hasNutrition,
   type CartItem,
@@ -91,7 +94,13 @@ export function CatalogoDelivery() {
       </main>
 
       <SiteFooter hasCartBar={totalItems > 0} />
-      {totalItems > 0 && <CartBar totalItems={totalItems} onOpen={() => setCartOpen(true)} />}
+      {totalItems > 0 && (
+        <CartBar
+          totalItems={totalItems}
+          total={cartTotal(cart)}
+          onOpen={() => setCartOpen(true)}
+        />
+      )}
       <CartDrawer
         cart={cart}
         open={cartOpen}
@@ -133,9 +142,9 @@ function Hero() {
 
         <div className="relative mx-auto w-full max-w-md md:max-w-[26rem] md:translate-y-6 lg:max-w-[30rem] lg:translate-y-8">
           <img
-            src={andreiaBrownie}
-            alt="Andreia Oliveira sorrindo enquanto come um pedaço de bolo"
-            className="aspect-[4/5] max-h-[min(34rem,calc(100svh-10rem))] w-full rounded-[2rem] object-cover object-[center_18%] brightness-105 md:max-h-[min(30rem,calc(100svh-12rem))]"
+            src={andreiaHistory}
+            alt="Andreia Oliveira olhando um pedaço de bolo na cozinha"
+            className="aspect-[4/5] max-h-[min(34rem,calc(100svh-10rem))] w-full rounded-[2rem] object-cover object-[center_22%] brightness-110 md:max-h-[min(30rem,calc(100svh-12rem))]"
           />
         </div>
       </Container>
@@ -269,7 +278,10 @@ function ProductCard({
       </div>
 
       <div className="flex flex-1 flex-col p-5">
-        <h3 className="text-xl font-semibold text-[#1a1a1a]">{product.name}</h3>
+        <div className="flex items-start justify-between gap-3">
+          <h3 className="text-xl font-semibold text-[#1a1a1a]">{product.name}</h3>
+          <p className="shrink-0 text-lg font-bold text-pink">{formatBRL(product.price)}</p>
+        </div>
         <p className="mt-2 line-clamp-2 text-sm leading-[1.5] text-graphite">{product.description}</p>
         <p className="mt-2 text-xs text-graphite/70">{product.serving}</p>
 
@@ -285,7 +297,7 @@ function ProductCard({
           </dl>
         ) : null}
 
-        {(product.ingredients || nutrition) && (
+        {nutrition && (
           <div className="mt-4">
             <button
               type="button"
@@ -293,17 +305,11 @@ function ProductCard({
               className="cursor-pointer text-sm font-semibold text-pink hover:underline"
               aria-expanded={detailsOpen}
             >
-              {detailsOpen ? 'Ocultar detalhes' : 'Ver tabela e ingredientes'}
+              {detailsOpen ? 'Ocultar tabela' : 'Ver tabela nutricional'}
             </button>
             {detailsOpen && (
               <div className="mt-3">
-                {product.ingredients && (
-                  <p className="text-sm leading-[1.5] text-graphite/80">
-                    <span className="font-semibold text-[#1a1a1a]">Ingredientes: </span>
-                    {product.ingredients.join(', ')}.
-                  </p>
-                )}
-                {nutrition && <NutritionTable product={product} />}
+                <NutritionTable product={product} />
               </div>
             )}
           </div>
@@ -473,20 +479,26 @@ function SiteFooter({ hasCartBar }: { hasCartBar: boolean }) {
   )
 }
 
-function CartBar({ totalItems, onOpen }: { totalItems: number; onOpen: () => void }) {
+function CartBar({
+  totalItems,
+  total,
+  onOpen,
+}: {
+  totalItems: number
+  total: number
+  onOpen: () => void
+}) {
   return (
     <div className="fixed inset-x-0 bottom-0 z-50 border-t border-black/5 bg-white/90 backdrop-blur-md">
       <Container className="flex h-20 items-center justify-between gap-4">
         <div className="flex flex-col">
-          <span className="text-xs text-graphite">Seu pedido</span>
-          <span className="text-lg font-semibold text-[#1a1a1a]">
-            {totalItems === 0
-              ? 'Carrinho vazio'
-              : `${totalItems} ${totalItems === 1 ? 'item' : 'itens'}`}
+          <span className="text-xs text-graphite">
+            {totalItems} {totalItems === 1 ? 'item' : 'itens'}
           </span>
+          <span className="text-lg font-semibold text-[#1a1a1a]">{formatBRL(total)}</span>
         </div>
         <Button variant="solid" size="sm" onClick={onOpen}>
-          {totalItems === 0 ? 'Ver pedido' : 'Revisar pedido'}
+          Revisar pedido
         </Button>
       </Container>
     </div>
@@ -523,6 +535,7 @@ function CartDrawer({
 
   const checkoutHref = deliveryCartWhatsappHref(cart)
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0)
+  const total = cartTotal(cart)
 
   return (
     <div
@@ -585,14 +598,26 @@ function CartDrawer({
                     )}
                     <div className="min-w-0 flex-1">
                       <div className="flex items-start justify-between gap-3">
-                        <p className="font-semibold text-[#1a1a1a]">{item.name}</p>
-                        <button
-                          type="button"
-                          onClick={() => onRemove(item.name)}
-                          className="cursor-pointer text-xs font-semibold tracking-wide text-graphite uppercase hover:text-pink"
-                        >
-                          Remover
-                        </button>
+                        <div className="min-w-0">
+                          <p className="font-semibold text-[#1a1a1a]">{item.name}</p>
+                          {product && (
+                            <p className="mt-1 text-sm text-graphite">
+                              {formatBRL(product.price)} cada
+                            </p>
+                          )}
+                        </div>
+                        <div className="flex flex-col items-end gap-2">
+                          <p className="text-sm font-bold text-[#1a1a1a]">
+                            {formatBRL(cartLineTotal(item))}
+                          </p>
+                          <button
+                            type="button"
+                            onClick={() => onRemove(item.name)}
+                            className="cursor-pointer text-xs font-semibold tracking-wide text-graphite uppercase hover:text-pink"
+                          >
+                            Remover
+                          </button>
+                        </div>
                       </div>
                       <QuantityStepper
                         quantity={item.quantity}
@@ -615,11 +640,15 @@ function CartDrawer({
             </Button>
           ) : (
             <>
+              <div className="mb-4 flex items-end justify-between gap-3">
+                <span className="text-sm text-graphite">Total dos produtos</span>
+                <span className="text-2xl font-bold text-[#1a1a1a]">{formatBRL(total)}</span>
+              </div>
               <Button href={checkoutHref} variant="solid" size="lg" className="w-full">
                 Enviar pedido no WhatsApp
               </Button>
               <p className="mt-3 text-center text-xs leading-[1.45] text-graphite">
-                O WhatsApp abre com a lista do que você escolheu.
+                O WhatsApp abre com a lista e o total. A entrega é à parte.
               </p>
             </>
           )}

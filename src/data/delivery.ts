@@ -23,16 +23,36 @@ export type CartItem = {
   quantity: number
 }
 
+export function formatBRL(value: number) {
+  return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+}
+
+export function cartLineTotal(item: CartItem) {
+  const product = deliveryProducts.find((entry) => entry.name === item.name)
+  return (product?.price ?? 0) * item.quantity
+}
+
+export function cartTotal(items: CartItem[]) {
+  return items.reduce((sum, item) => sum + cartLineTotal(item), 0)
+}
+
 export function deliveryCartWhatsappHref(items: CartItem[]) {
   if (items.length === 0) return deliveryWhatsappHref
 
-  const lines = items.map((item) => `• ${item.quantity}x ${item.name}`)
+  const lines = items.map((item) => {
+    const product = deliveryProducts.find((entry) => entry.name === item.name)
+    const line = cartLineTotal(item)
+    const unit = product ? ` ${formatBRL(product.price)}` : ''
+    return `• ${item.quantity}x ${item.name}${unit} = ${formatBRL(line)}`
+  })
   const text = [
     'Olá! Vi o catálogo do delivery Nutrideia e quero fazer um pedido:',
     '',
     ...lines,
     '',
-    'Pode me passar a disponibilidade e o valor, por favor?',
+    `Total dos produtos: ${formatBRL(cartTotal(items))}`,
+    '',
+    'Pode me passar o valor da entrega no meu bairro, por favor?',
   ].join('\n')
 
   return `https://wa.me/${deliveryWhatsappNumber}?text=${encodeURIComponent(text)}`
@@ -57,7 +77,7 @@ export type DeliveryProduct = {
   category: DeliveryCategory
   description: string
   serving: string
-  ingredients?: string[]
+  price: number
   image: string
   calories?: number
   protein?: number
@@ -84,54 +104,48 @@ export function hasNutrition(
 
 export const deliveryProducts: DeliveryProduct[] = [
   {
-    name: 'Pão pra secar',
+    name: 'Pão pra secar tradicional',
     category: 'Pães',
     description: 'O pão do delivery: fofinho, proteico e feito pra caber na dieta sem abrir mão do pão.',
-    serving: 'Porção de 50 g (1 fatia)',
+    serving: '14 fatias | 10 g de proteína por fatia',
+    price: 80,
     image: paoSecar,
     calories: 118,
-    protein: 12,
+    protein: 10,
     carbs: 4,
     fat: 5,
-  },
-  {
-    name: 'Pão de gergelim',
-    category: 'Pães',
-    description: 'Casquinha dourada com gergelim. Versão low carb pra sanduíche ou café da manhã.',
-    serving: 'Porção de 50 g (1 unidade)',
-    image: paoRustico,
-    calories: 138,
-    protein: 11,
-    carbs: 5,
-    fat: 7,
   },
   {
     name: 'Pão de passas com canela',
     category: 'Pães',
     description: 'Cheirinho de padaria, passas e canela. Doce na medida, com proteína de verdade.',
-    serving: 'Porção de 60 g (1 fatia)',
+    serving: '14 fatias | 10 g de proteína por fatia',
+    price: 85,
     image: paoPassas,
     calories: 152,
-    protein: 11,
+    protein: 10,
     carbs: 8,
     fat: 6,
+  },
+  {
+    name: 'Pão rústico Nutrideia',
+    category: 'Pães',
+    description: 'Estilo pão integral, só que sem farinha! Casquinha dourada pra sanduíche ou café da manhã.',
+    serving: '14 fatias | 15 g de proteína por fatia',
+    price: 105,
+    image: paoRustico,
+    calories: 138,
+    protein: 15,
+    carbs: 5,
+    fat: 7,
   },
   {
     name: 'Bolo inglês de amêndoas',
     category: 'Bolos',
     description: 'Bolo inglês proteico com farinha de amêndoas. Fatia que entra na cota sem abrir mão do bolo.',
-    serving: '1 fatia equivalente a 1/7 do bolo (70,3 g)',
+    serving: '7 fatias | 12 g de proteína por fatia',
+    price: 75,
     image: boloAmendoas,
-    ingredients: [
-      'farinha de amêndoas',
-      'ovos',
-      'eritritol',
-      'manteiga',
-      'whey protein sem sabor',
-      'glicina',
-      'fermento químico em pó',
-      'vinagre de caldo de cana',
-    ],
     calories: 220,
     protein: 12,
     carbs: 5.2,
@@ -142,19 +156,9 @@ export const deliveryProducts: DeliveryProduct[] = [
     name: 'Bolo inglês mesclado',
     category: 'Bolos',
     description: 'Baunilha e chocolate no mesmo pedaço, em versão low carb e proteica.',
-    serving: '1 fatia equivalente a 1/7 do bolo',
+    serving: '7 fatias | 12 g de proteína por fatia',
+    price: 75,
     image: boloMesclado,
-    ingredients: [
-      'farinha de amêndoas',
-      'ovos',
-      'eritritol',
-      'manteiga',
-      'whey protein sem sabor',
-      'cacau em pó 100%',
-      'glicina',
-      'fermento químico em pó',
-      'vinagre de caldo de cana',
-    ],
     calories: 229,
     protein: 12,
     carbs: 5.7,
@@ -165,19 +169,9 @@ export const deliveryProducts: DeliveryProduct[] = [
     name: 'Bolo inglês de chocolate',
     category: 'Bolos',
     description: 'O bolo de chocolate do delivery, com cacau 100% e whey. Chocolate na rotina, sem culpa.',
-    serving: '1 fatia equivalente a 1/7 do bolo',
+    serving: '7 fatias | 12 g de proteína por fatia',
+    price: 75,
     image: boloChocolate,
-    ingredients: [
-      'farinha de amêndoas',
-      'ovos',
-      'eritritol',
-      'manteiga',
-      'whey protein sem sabor',
-      'cacau em pó 100%',
-      'glicina',
-      'fermento químico em pó',
-      'vinagre de caldo de cana',
-    ],
     calories: 239,
     protein: 12,
     carbs: 6.3,
@@ -188,18 +182,9 @@ export const deliveryProducts: DeliveryProduct[] = [
     name: 'Bolo inglês de paçoca',
     category: 'Bolos',
     description: 'Farinha de amendoim torrado com pele. Sabor de paçoca em bolo inglês proteico.',
-    serving: '1 fatia equivalente a 1/7 do bolo',
+    serving: '7 fatias | 12 g de proteína por fatia',
+    price: 75,
     image: boloAmendoim,
-    ingredients: [
-      'farinha de amendoim torrado com pele',
-      'ovos',
-      'eritritol',
-      'manteiga',
-      'whey protein sem sabor',
-      'glicina',
-      'fermento químico em pó',
-      'vinagre de caldo de cana',
-    ],
     calories: 218,
     protein: 12,
     carbs: 5.1,
@@ -210,37 +195,45 @@ export const deliveryProducts: DeliveryProduct[] = [
     name: 'Biscoito Divo',
     category: 'Doces',
     description: 'Crocante, leve e fácil de levar. O biscoito do delivery pra beliscar com consciência.',
-    serving: '1 pote',
+    serving: '50 g | 14 g de proteína',
+    price: 15,
     image: biscoitoDivo,
     protein: 14,
   },
   {
-    name: 'Creme de avelã',
+    name: 'Creme de avelã proteico',
     category: 'Doces',
     description: 'Cremoso pra passar no pão, na fruta ou comer de colher. Sem açúcar, com proteína.',
-    serving: '1 pote',
+    serving: '200 g | 25 g de proteína',
+    price: 45,
     image: cremeAvela,
     protein: 25,
   },
   {
-    name: 'Potinho de chocolate',
+    name: 'Potinho da felicidade de chocolate',
     category: 'Doces',
-    description: 'Bolo de chocolate em camadas no potinho, com creme. A sobremesa do delivery pra comer de colher.',
-    serving: '1 potinho',
+    description: 'Um bolo de pote super molhadinho, pra comer de colher.',
+    serving: '1 potinho | 25 g de proteína',
+    price: 25,
     image: potinhoChocolate,
+    protein: 25,
   },
   {
-    name: 'Potinho de amendoim',
+    name: 'Potinho da felicidade de paçoca',
     category: 'Doces',
-    description: 'Camadas de bolo e creme de amendoim, com crocante por cima.',
-    serving: '1 potinho',
+    description: 'Um bolo de pote super molhadinho, com sabor de paçoca.',
+    serving: '1 potinho | 25 g de proteína',
+    price: 25,
     image: potinhoAmendoim,
+    protein: 25,
   },
   {
-    name: 'Potinho de brigadeiro branco',
+    name: 'Potinho da felicidade de brigadeiro branco',
     category: 'Doces',
-    description: 'Bolo fofinho com creme de brigadeiro branco no potinho.',
-    serving: '1 potinho',
+    description: 'Um bolo de pote super molhadinho, com creme de brigadeiro branco.',
+    serving: '1 potinho | 25 g de proteína',
+    price: 25,
     image: potinhoBrigadeiroBranco,
+    protein: 25,
   },
 ]
