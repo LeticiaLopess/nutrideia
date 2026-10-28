@@ -226,6 +226,13 @@
     color: #060606;
   }
 
+  html.theme-delivery {
+    background-color: #fff7fa;
+    color: #1a1a1a;
+    --font-sans: 'Montserrat', 'Segoe UI', system-ui, sans-serif;
+    --font-display: 'Right Female', cursive;
+  }
+
   html {
     @apply scroll-smooth scroll-pt-20 bg-black font-sans text-white antialiased;
   }

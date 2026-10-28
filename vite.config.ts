@@ -19,6 +19,7 @@ export default defineConfig({
         cozinha: fileURLToPath(new URL('./cozinha-nutrideia/index.html', import.meta.url)),
         choque: fileURLToPath(new URL('./choque-metabolismo/index.html', import.meta.url)),
         terapia: fileURLToPath(new URL('./terapia-emagrecimento/index.html', import.meta.url)),
+        catalogo: fileURLToPath(new URL('./catalogo-delivery/index.html', import.meta.url)),
       },
     },
   },
