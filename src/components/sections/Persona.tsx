@@ -6,7 +6,7 @@ import { Badge, Button, Container, GlowText, ScriptText, Section } from '../ui'
 
 export function Persona() {
   return (
-    <Section id="para-voce" className="bg-[#eef0f2]">
+    <Section id="para-voce" className="bg-[#fff7fa]">
       <Container className="grid items-center gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
         <picture className="mx-auto w-full max-w-xl">
           <source media="(min-width: 1024px)" srcSet={personaSectionLg} />

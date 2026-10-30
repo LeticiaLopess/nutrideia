@@ -1,15 +1,8 @@
-import pattern from '../../assets/images/pattern.png'
-import { Container, OverlayBackground, ScriptText, Section } from '../ui'
+import { Container, ScriptText, Section } from '../ui'
 
 export function Quote() {
   return (
     <Section id="frase" className="bg-[#fff7fa] py-28 lg:py-40">
-      <OverlayBackground
-        src={pattern}
-        className="inset-0 -z-10 opacity-40"
-        overlayClassName="bg-[#fff7fa]/70"
-      />
-
       <Container className="flex flex-col items-center py-8 text-center lg:py-16">
         <blockquote className="max-w-3xl">
           <p className="text-3xl leading-[1.1] font-medium tracking-[-0.02em] text-[#1a1a1a] sm:text-4xl lg:text-5xl">

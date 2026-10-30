@@ -1,5 +1,5 @@
 import { methodPillars } from '../../data/method'
-import { Badge, Container, GlowText, ScriptText, Section } from '../ui'
+import { Badge, CheckIcon, Container, GlowText, ScriptText, Section } from '../ui'
 
 export function Method() {
   return (
@@ -24,20 +24,23 @@ export function Method() {
           </p>
         </div>
 
-        <ol className="mt-16 grid w-full gap-6 sm:grid-cols-2 lg:mt-20 lg:grid-cols-4">
-          {methodPillars.map((pillar, index) => (
+        <ul className="mt-16 grid w-full gap-6 sm:grid-cols-2 lg:mt-20 lg:grid-cols-4">
+          {methodPillars.map((pillar) => (
             <li
               key={pillar.title}
-              className="flex flex-col rounded-2xl border border-pink/15 bg-white p-8 shadow-[0_14px_40px_rgb(230_0_126/0.08)] transition-colors duration-300 hover:border-pink/40"
+              className="flex flex-col rounded-2xl border border-pink/15 bg-white p-7 shadow-[0_14px_40px_rgb(230_0_126/0.08)] transition-all duration-300 hover:-translate-y-1 hover:border-pink/40 hover:shadow-[0_18px_44px_rgb(230_0_126/0.12)]"
             >
-              <span className="font-display text-5xl leading-none text-pink">
-                {String(index + 1).padStart(2, '0')}
+              <span
+                aria-hidden="true"
+                className="flex size-8 items-center justify-center rounded-lg bg-pink/10 text-pink"
+              >
+                <CheckIcon className="size-5" />
               </span>
-              <h3 className="mt-6 text-lg font-semibold text-[#1a1a1a]">{pillar.title}</h3>
+              <h3 className="mt-5 text-lg font-semibold text-[#1a1a1a]">{pillar.title}</h3>
               <p className="mt-3 text-sm leading-[1.6] text-graphite">{pillar.description}</p>
             </li>
           ))}
-        </ol>
+        </ul>
 
         <p className="mt-16 text-center text-xl text-[#1a1a1a] sm:text-2xl">
           Emagrecer sem comer igual passarinho:{' '}

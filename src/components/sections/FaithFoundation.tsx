@@ -95,7 +95,7 @@ const styles: Record<
   }
 > = {
   home: {
-    section: 'bg-[#8b1450] text-white',
+    section: 'bg-[#9D0056] text-white',
     heading: 'text-white',
     body: 'text-white/85',
     verseBox: 'border-white/20 bg-white/10',

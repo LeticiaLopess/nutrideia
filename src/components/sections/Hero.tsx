@@ -1,4 +1,4 @@
-import andreiaHero from '../../assets/images/andreia-hero.png'
+import andreiaHero from '../../assets/images/andreia-black-dress.png'
 import { whatsappHref } from '../../data/navigation'
 import { Button, Container, GlowText, RadialGlow } from '../ui'
 
@@ -28,18 +28,20 @@ export function Hero() {
         </div>
 
         <div className="relative flex justify-center self-end lg:justify-end">
-          <img
-            src={andreiaHero}
-            alt="Andreia, nutricionista"
-            className="h-auto w-full max-w-md max-sm:w-[112%] max-sm:max-w-none lg:w-[107%] lg:max-w-[720px] lg:translate-x-6"
-          />
-          <ul className="absolute top-[44%] right-1 z-10 flex flex-col items-end gap-1.5 sm:gap-2.5 lg:top-[42%] lg:-right-4">
+          <div className="w-full max-w-md overflow-hidden max-sm:w-[112%] max-sm:max-w-none lg:w-[114%] lg:max-w-[780px] lg:translate-x-6">
+            <img
+              src={andreiaHero}
+              alt="Andreia, nutricionista"
+              className="block h-auto w-full origin-top scale-[1.08] -mb-[28%]"
+            />
+          </div>
+          <ul className="absolute top-[39%] right-0 z-10 flex flex-col items-end gap-1 sm:gap-1.5 lg:top-[37%] lg:-right-1">
             {heroBadges.map((badge, index) => (
               <li
                 key={badge}
-                className="animate-badge-float motion-reduce:animate-none whitespace-nowrap rounded-full border border-pink/25 bg-white px-2.5 py-1 text-[9px] font-semibold tracking-[0.08em] text-[#1a1a1a] uppercase shadow-[0_6px_16px_rgb(230_0_126/0.12)] sm:px-4 sm:py-1.5 sm:text-xs sm:tracking-[0.14em]"
+                className="animate-badge-float motion-reduce:animate-none whitespace-nowrap rounded-full border border-pink bg-pink px-2 py-0.5 text-[8px] font-semibold tracking-[0.08em] text-white uppercase shadow-[0_6px_16px_rgb(230_0_126/0.28)] sm:px-3 sm:py-1 sm:text-[11px] sm:tracking-[0.12em]"
                 style={{
-                  marginRight: index === 1 ? '0.55rem' : 0,
+                  marginRight: index === 1 ? '0.4rem' : 0,
                   animationDelay: `${index * 0.35}s`,
                 }}
               >
