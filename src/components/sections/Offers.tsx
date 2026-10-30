@@ -4,21 +4,24 @@ import { Badge, Button, Container, GlowText, RadialGlow, ScriptText, Section } f
 
 export function Offers() {
   return (
-    <Section id="comece-agora" className="bg-[#101010]">
+    <Section id="comece-agora" className="bg-white">
       <RadialGlow className="-top-80 left-1/2 -z-10 size-240 -translate-x-1/2" />
 
       <Container className="flex flex-col items-center">
         <div className="flex max-w-3xl flex-col items-center text-center">
           <Badge>Comece agora</Badge>
 
-          <h2 className="mt-6 text-3xl leading-tight font-medium text-neutral-100 sm:text-4xl lg:text-[2.75rem]">
+          <h2 className="mt-6 text-3xl leading-tight font-medium text-[#1a1a1a] sm:text-4xl lg:text-[2.75rem]">
             Escolha o caminho da sua{' '}
-            <GlowText animated={false} className="font-display mt-1 text-[1.3em] leading-none font-normal">
+            <GlowText
+              animated={false}
+              className="font-display mt-1 text-[1.3em] leading-none font-normal [text-shadow:0_0_18px_rgb(var(--glow-rgb)/0.25)]!"
+            >
               <ScriptText>transformação.</ScriptText>
             </GlowText>
           </h2>
 
-          <p className="mt-8 max-w-2xl text-base leading-[1.6] text-neutral-300 lg:text-lg">
+          <p className="mt-8 max-w-2xl text-base leading-[1.6] text-graphite lg:text-lg">
             Comece pela cozinha ou mergulhe de vez no Choque no Metabolismo. Todos os caminhos levam ao mesmo
             lugar: renovar a mente, bater a cota de proteína e voltar a amar o que você vê no
             espelho.
@@ -32,8 +35,8 @@ export function Offers() {
               className={cn(
                 'relative flex flex-col rounded-2xl border p-6 sm:p-10',
                 offer.featured
-                  ? 'border-pink/60 bg-pink/[0.07] shadow-[0_0_60px_rgb(var(--glow-rgb)/0.15)]'
-                  : 'border-white/10 bg-white/3',
+                  ? 'border-pink/50 bg-pink/[0.06] shadow-[0_14px_40px_rgb(230_0_126/0.14)]'
+                  : 'border-pink/15 bg-white shadow-[0_14px_40px_rgb(230_0_126/0.08)]',
               )}
             >
               {offer.image ? (
@@ -46,7 +49,7 @@ export function Offers() {
               ) : (
                 <div
                   aria-hidden="true"
-                  className="mb-8 flex aspect-[3/1] w-full items-center justify-center rounded-xl border border-dashed border-white/20 bg-white/[0.02] text-xs font-medium tracking-widest text-neutral-500 uppercase"
+                  className="mb-8 flex aspect-[3/1] w-full items-center justify-center rounded-xl border border-dashed border-pink/20 bg-[#fff7fa] text-xs font-medium tracking-widest text-graphite uppercase"
                 >
                   Imagem do produto
                 </div>
@@ -56,16 +59,16 @@ export function Offers() {
                 {offer.format}
               </span>
 
-              <h3 className="mt-4 text-2xl font-semibold text-white sm:text-3xl">{offer.name}</h3>
+              <h3 className="mt-4 text-2xl font-semibold text-[#1a1a1a] sm:text-3xl">{offer.name}</h3>
               <p className="font-display mt-1 text-2xl leading-tight text-pink">
                 <ScriptText>{offer.tagline}</ScriptText>
               </p>
 
-              <p className="mt-6 text-[15px] leading-[1.45] text-neutral-300">{offer.description}</p>
+              <p className="mt-6 text-[15px] leading-[1.45] text-graphite">{offer.description}</p>
 
-              <ul className="mt-8 mb-10 flex flex-col gap-4 border-t border-white/10 pt-8">
+              <ul className="mt-8 mb-10 flex flex-col gap-4 border-t border-pink/10 pt-8">
                 {offer.benefits.map((benefit) => (
-                  <li key={benefit} className="flex items-start gap-3 text-base leading-normal text-neutral-200">
+                  <li key={benefit} className="flex items-start gap-3 text-base leading-normal text-[#1a1a1a]">
                     <svg
                       viewBox="0 0 24 24"
                       fill="none"
@@ -84,14 +87,14 @@ export function Offers() {
               </ul>
 
               <div className="mt-auto mb-6 text-center">
-                <p className="text-xs font-medium tracking-widest text-neutral-400 uppercase">
+                <p className="text-xs font-medium tracking-widest text-graphite uppercase">
                   Investimento
                 </p>
-                <p className="mt-2 text-[2.5rem] leading-none sm:text-[2.75rem] font-semibold text-white">
+                <p className="mt-2 text-[2.5rem] leading-none font-semibold text-[#1a1a1a] sm:text-[2.75rem]">
                   {offer.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
                 </p>
                 {offer.priceNote && (
-                  <p className="mt-1 text-sm text-neutral-400">{offer.priceNote}</p>
+                  <p className="mt-1 text-sm text-graphite">{offer.priceNote}</p>
                 )}
               </div>
 

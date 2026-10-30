@@ -22,7 +22,7 @@ export function Header() {
       className={cn(
         'fixed inset-x-0 top-0 z-50 transition-all duration-300',
         scrolled || menuOpen
-          ? 'border-b border-white/10 bg-black/70 backdrop-blur-md'
+          ? 'border-b border-black/5 bg-white/80 backdrop-blur-md'
           : 'bg-transparent',
       )}
     >
@@ -60,16 +60,16 @@ export function Header() {
         >
           <span
             className={cn(
-              'h-0.5 w-6 bg-white transition-transform duration-300',
+              'h-0.5 w-6 bg-[#1a1a1a] transition-transform duration-300',
               menuOpen && 'translate-y-2 rotate-45',
             )}
           />
           <span
-            className={cn('h-0.5 w-6 bg-white transition-opacity duration-300', menuOpen && 'opacity-0')}
+            className={cn('h-0.5 w-6 bg-[#1a1a1a] transition-opacity duration-300', menuOpen && 'opacity-0')}
           />
           <span
             className={cn(
-              'h-0.5 w-6 bg-white transition-transform duration-300',
+              'h-0.5 w-6 bg-[#1a1a1a] transition-transform duration-300',
               menuOpen && '-translate-y-2 -rotate-45',
             )}
           />

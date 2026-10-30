@@ -15,7 +15,7 @@ export function FramedImage({ wrapperClassName, className, alt, ...props }: Fram
       <img
         alt={alt}
         className={cn(
-          'h-full w-full rounded-2xl border-2 border-white/5 object-cover shadow-2xl',
+          'h-full w-full rounded-2xl border-2 border-pink/15 object-cover shadow-[0_18px_40px_rgb(230_0_126/0.12)]',
           className,
         )}
         {...props}

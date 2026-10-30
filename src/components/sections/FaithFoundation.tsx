@@ -95,12 +95,14 @@ const styles: Record<
   }
 > = {
   home: {
-    section: 'bg-black',
-    heading: 'text-neutral-100',
-    body: 'text-neutral-300',
-    verseBox: 'border-pink/25 bg-white/[0.03]',
-    verse: 'text-neutral-200',
-    cite: 'text-pink',
+    section: 'bg-[#8b1450] text-white',
+    heading: 'text-white',
+    body: 'text-white/85',
+    verseBox: 'border-white/20 bg-white/10',
+    verse: 'text-white',
+    cite: 'text-[#fce8f2]',
+    badgeClassName: 'text-[#fce8f2]!',
+    glowClassName: 'text-[#fce8f2]! [text-shadow:0_0_24px_rgb(252_232_242/0.45)]!',
   },
   choque: {
     section: 'bg-black text-[#fdfaf0]',

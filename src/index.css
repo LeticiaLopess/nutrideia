@@ -233,6 +233,11 @@
     --font-display: 'Right Female', cursive;
   }
 
+  html.theme-home {
+    background-color: #fff7fa;
+    color: #1a1a1a;
+  }
+
   html {
     @apply scroll-smooth scroll-pt-20 bg-black font-sans text-white antialiased;
   }
