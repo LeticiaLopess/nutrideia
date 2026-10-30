@@ -65,6 +65,12 @@ export function formatGrams(value: number) {
   })} g`
 }
 
+export function formatIngredients(ingredients: string[]) {
+  if (ingredients.length === 0) return ''
+  if (ingredients.length === 1) return ingredients[0]
+  return `${ingredients.slice(0, -1).join(', ')} e ${ingredients[ingredients.length - 1]}`
+}
+
 export const cakeMacrosNote =
   'Carboidratos disponíveis, sem fibras e eritritol. Valores estimados transcritos das fichas de preparação. A manteiga para untar não está quantificada nos macros.'
 
@@ -79,6 +85,7 @@ export type DeliveryProduct = {
   serving: string
   price: number
   image: string
+  ingredients: string[]
   calories?: number
   protein?: number
   carbs?: number
@@ -110,6 +117,15 @@ export const deliveryProducts: DeliveryProduct[] = [
     serving: '14 fatias | 10 g de proteína por fatia',
     price: 80,
     image: paoSecar,
+    ingredients: [
+      'ovos',
+      'whey protein sem sabor',
+      'eritritol',
+      'manteiga',
+      'glicina',
+      'fermento químico em pó',
+      'vinagre de caldo de cana',
+    ],
     calories: 118,
     protein: 10,
     carbs: 4,
@@ -122,6 +138,17 @@ export const deliveryProducts: DeliveryProduct[] = [
     serving: '14 fatias | 10 g de proteína por fatia',
     price: 85,
     image: paoPassas,
+    ingredients: [
+      'ovos',
+      'whey protein sem sabor',
+      'passas',
+      'canela',
+      'eritritol',
+      'manteiga',
+      'glicina',
+      'fermento químico em pó',
+      'vinagre de caldo de cana',
+    ],
     calories: 152,
     protein: 10,
     carbs: 8,
@@ -134,6 +161,15 @@ export const deliveryProducts: DeliveryProduct[] = [
     serving: '14 fatias | 15 g de proteína por fatia',
     price: 105,
     image: paoRustico,
+    ingredients: [
+      'ovos',
+      'whey protein sem sabor',
+      'semente de linhaça',
+      'gergelim',
+      'glicina',
+      'fermento químico em pó',
+      'vinagre de caldo de cana',
+    ],
     calories: 138,
     protein: 15,
     carbs: 5,
@@ -146,6 +182,16 @@ export const deliveryProducts: DeliveryProduct[] = [
     serving: '7 fatias | 12 g de proteína por fatia',
     price: 75,
     image: boloAmendoas,
+    ingredients: [
+      'farinha de amêndoas',
+      'ovos',
+      'eritritol',
+      'manteiga',
+      'whey protein sem sabor',
+      'glicina',
+      'fermento químico em pó',
+      'vinagre de caldo de cana',
+    ],
     calories: 220,
     protein: 12,
     carbs: 5.2,
@@ -159,6 +205,17 @@ export const deliveryProducts: DeliveryProduct[] = [
     serving: '7 fatias | 12 g de proteína por fatia',
     price: 75,
     image: boloMesclado,
+    ingredients: [
+      'farinha de amêndoas',
+      'ovos',
+      'eritritol',
+      'manteiga',
+      'whey protein sem sabor',
+      'cacau em pó 100%',
+      'glicina',
+      'fermento químico em pó',
+      'vinagre de caldo de cana',
+    ],
     calories: 229,
     protein: 12,
     carbs: 5.7,
@@ -172,6 +229,17 @@ export const deliveryProducts: DeliveryProduct[] = [
     serving: '7 fatias | 12 g de proteína por fatia',
     price: 75,
     image: boloChocolate,
+    ingredients: [
+      'farinha de amêndoas',
+      'ovos',
+      'eritritol',
+      'manteiga',
+      'whey protein sem sabor',
+      'cacau em pó 100%',
+      'glicina',
+      'fermento químico em pó',
+      'vinagre de caldo de cana',
+    ],
     calories: 239,
     protein: 12,
     carbs: 6.3,
@@ -185,6 +253,16 @@ export const deliveryProducts: DeliveryProduct[] = [
     serving: '7 fatias | 12 g de proteína por fatia',
     price: 75,
     image: boloAmendoim,
+    ingredients: [
+      'farinha de amendoim torrado com pele',
+      'ovos',
+      'eritritol',
+      'manteiga',
+      'whey protein sem sabor',
+      'glicina',
+      'fermento químico em pó',
+      'vinagre de caldo de cana',
+    ],
     calories: 218,
     protein: 12,
     carbs: 5.1,
@@ -198,6 +276,14 @@ export const deliveryProducts: DeliveryProduct[] = [
     serving: '50 g | 14 g de proteína',
     price: 15,
     image: biscoitoDivo,
+    ingredients: [
+      'whey protein sem sabor',
+      'ovos',
+      'eritritol',
+      'manteiga',
+      'farinha de amêndoas',
+      'glicina',
+    ],
     protein: 14,
   },
   {
@@ -207,6 +293,13 @@ export const deliveryProducts: DeliveryProduct[] = [
     serving: '200 g | 25 g de proteína',
     price: 45,
     image: cremeAvela,
+    ingredients: [
+      'avelã',
+      'whey protein sem sabor',
+      'eritritol',
+      'cacau em pó 100%',
+      'manteiga',
+    ],
     protein: 25,
   },
   {
@@ -216,6 +309,16 @@ export const deliveryProducts: DeliveryProduct[] = [
     serving: '1 potinho | 25 g de proteína',
     price: 25,
     image: potinhoChocolate,
+    ingredients: [
+      'farinha de amêndoas',
+      'ovos',
+      'eritritol',
+      'manteiga',
+      'whey protein sem sabor',
+      'cacau em pó 100%',
+      'glicina',
+      'fermento químico em pó',
+    ],
     protein: 25,
   },
   {
@@ -225,6 +328,15 @@ export const deliveryProducts: DeliveryProduct[] = [
     serving: '1 potinho | 25 g de proteína',
     price: 25,
     image: potinhoAmendoim,
+    ingredients: [
+      'farinha de amendoim torrado com pele',
+      'ovos',
+      'eritritol',
+      'manteiga',
+      'whey protein sem sabor',
+      'glicina',
+      'fermento químico em pó',
+    ],
     protein: 25,
   },
   {
@@ -234,6 +346,16 @@ export const deliveryProducts: DeliveryProduct[] = [
     serving: '1 potinho | 25 g de proteína',
     price: 25,
     image: potinhoBrigadeiroBranco,
+    ingredients: [
+      'farinha de amêndoas',
+      'ovos',
+      'eritritol',
+      'manteiga',
+      'whey protein sem sabor',
+      'leite em pó',
+      'glicina',
+      'fermento químico em pó',
+    ],
     protein: 25,
   },
 ]

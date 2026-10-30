@@ -13,6 +13,7 @@ import {
   deliveryProducts,
   formatBRL,
   formatGrams,
+  formatIngredients,
   hasNutrition,
   type CartItem,
   type DeliveryCategory,
@@ -297,23 +298,31 @@ function ProductCard({
           </dl>
         ) : null}
 
-        {nutrition && (
-          <div className="mt-4">
-            <button
-              type="button"
-              onClick={() => setDetailsOpen((open) => !open)}
-              className="cursor-pointer text-sm font-semibold text-pink hover:underline"
-              aria-expanded={detailsOpen}
-            >
-              {detailsOpen ? 'Ocultar tabela' : 'Ver tabela nutricional'}
-            </button>
-            {detailsOpen && (
-              <div className="mt-3">
-                <NutritionTable product={product} />
-              </div>
-            )}
-          </div>
-        )}
+        <div className="mt-4">
+          <button
+            type="button"
+            onClick={() => setDetailsOpen((open) => !open)}
+            className="cursor-pointer text-sm font-semibold text-pink hover:underline"
+            aria-expanded={detailsOpen}
+          >
+            {detailsOpen
+              ? nutrition
+                ? 'Ocultar detalhes'
+                : 'Ocultar ingredientes'
+              : nutrition
+                ? 'Ver tabela e ingredientes'
+                : 'Ver ingredientes'}
+          </button>
+          {detailsOpen && (
+            <div className="mt-3">
+              <p className="text-sm leading-[1.5] text-graphite/80">
+                <span className="font-semibold text-[#1a1a1a]">Ingredientes: </span>
+                {formatIngredients(product.ingredients)}.
+              </p>
+              {nutrition && <NutritionTable product={product} />}
+            </div>
+          )}
+        </div>
 
         <div className="mt-auto pt-5">
           {quantity > 0 ? (
