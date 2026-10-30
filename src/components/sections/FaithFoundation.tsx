@@ -24,7 +24,7 @@ const copy: Record<
         Você já sabe que precisa mudar a alimentação. Mas o que impede você de continuar? No Método
         Nutrideia, vamos trabalhar as crenças e os comportamentos que travam seu emagrecimento,
         enquanto você aprende a comer com prazer e cuidar de si.{' '}
-        <strong className="font-semibold text-white">Romanos 12:2</strong> inspira esse processo:
+        <strong className="font-semibold text-[#1a1a1a]">Romanos 12:2</strong> inspira esse processo:
         renovar a mente para transformar a maneira como você vive.
       </>
     ),
@@ -95,14 +95,14 @@ const styles: Record<
   }
 > = {
   home: {
-    section: 'bg-[#9D0056] text-white',
-    heading: 'text-white',
-    body: 'text-white/85',
-    verseBox: 'border-white/20 bg-white/10',
-    verse: 'text-white',
-    cite: 'text-[#fce8f2]',
-    badgeClassName: 'text-[#fce8f2]!',
-    glowClassName: 'text-[#fce8f2]! [text-shadow:0_0_24px_rgb(252_232_242/0.45)]!',
+    section: 'bg-[#ffe1f0] text-[#1a1a1a]',
+    heading: 'text-[#1a1a1a]',
+    body: 'text-[#3d3d3d]',
+    verseBox: 'border-[#C2185B]/20 bg-white/80',
+    verse: 'text-[#1a1a1a]',
+    cite: 'text-[#C2185B]',
+    badgeClassName: 'text-[#C2185B]!',
+    glowClassName: 'text-[#C2185B]! [text-shadow:none]!',
   },
   choque: {
     section: 'bg-black text-[#fdfaf0]',
