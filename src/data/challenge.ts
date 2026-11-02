@@ -39,7 +39,7 @@ export const challengeBenefits: ChallengeBenefit[] = [
   { text: 'Deixar de sofrer com o efeito sanfona de uma vez por todas', icon: 'repeat' },
   { text: 'Aprender uma nova forma de lidar com a comida, com consciência', icon: 'apple' },
   { text: 'Ter mais energia e disposição no dia a dia', icon: 'zap' },
-  { text: 'Reverter diabetes, hipertensão, gordura no fígado ou SOP', icon: 'stethoscope' },
+  { text: 'Combater diabetes, hipertensão, gordura no fígado ou SOP', icon: 'stethoscope' },
   { text: 'Acabar com a gordurinha abdominal que marca qualquer roupa', icon: 'ruler' },
   { text: 'Parar de gastar dinheiro com métodos que não funcionam', icon: 'wallet' },
 ]

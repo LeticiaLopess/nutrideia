@@ -12,11 +12,13 @@ export const xocanetaOffer = {
   endsAt: '2026-11-22T23:59:59-03:00',
   benefits: [
     '21 dias de Choque no Metabolismo, guiados por mim',
-    'O Método Nutrideia para emagrecer sem caneta e sem fome',
+    'O Método Nutrideia para emagrecer de forma natural sem canetas e sem fome',
     'Reprogramação da mente magra, passo a passo',
     'Receitas exclusivas para comer o que você ama',
+    'Bônus: ebook de receitas natalinas',
     'Grupo de mulheres na mesma jornada',
     'Como montar sozinha o seu cardápio pra vida',
+    '21 dias para entrar em cetose, sair da compulsão e virar uma máquina de queimar gordura',
   ],
 } as const
 
@@ -45,41 +47,41 @@ export const xocanetaMarquee = [
 ]
 
 export const xocanetaPains = [
-  'Já pensou na caneta porque “nada mais funciona” no seu corpo',
-  'Não quer passar a vida pagando por um atalho que não ensina a comer',
-  'Quer emagrecer de verdade, e que o resultado fique',
-  'Cansou dessas dietas que mandam comer de tudo um pouco e não adiantam',
-  'Não quer arriscar a saúde por um atalho',
+  'A caneta mente para o seu cérebro dizendo que você já comeu',
+  'O corpo continua pedindo nutrientes e a caneta continua mentindo pro seu cérebro',
+  'Você nunca bate sua cota de proteína diária e isso é um PERIGO',
+  'Emagrece, mas definha e desnutre: até perde gordura mas ao custo de muita massa magra',
+  'Quando para de aplicar, a compulsão volta. Ela só estava calada, não resolvida',
 ]
 
 export const xocanetaComparison = {
   pen: {
     title: 'A caneta',
     items: [
-      'Aluga o resultado. Para de aplicar, o peso volta',
-      'R$ 800 a R$ 2.000 todo mês, fácil',
-      'Não ensina a comer. Só segura a fome',
-      'Não reprograma o metabolismo',
-      'Não constrói hábito pra vida',
-      'Corre o risco de prejudicar a saúde',
+      'Camufla o resultado. Para de aplicar, o peso volta',
+      'Uns R$ 1.500 todo mês. No ano, uns R$ 18 mil',
+      'Cala a fome. Não ensina a comer',
+      'Imita o hormônio. O metabolismo não muda',
+      'Não cria hábito. Quando para, a compulsão volta',
+      'Perde massa magra: isso acaba com seu metabolismo',
     ],
   },
   shock: {
     title: 'O choque',
     items: [
-      'Reprograma o metabolismo com comida de verdade',
-      'Condição Black Friday: um único investimento',
-      'Proteína no centro, saciedade e prazer no prato',
-      'Mente magra: você para de se sabotar',
-      '21 dias com grupo, método e autonomia',
-      'Desde 2017, +10 mil mulheres, antes da moda da caneta',
+      'O resultado fica porque você aprendeu a comer',
+      'Um investimento. Não R$ 1.500 todo mês',
+      'Ativa a saciedade que o corpo já produz',
+      'Reprograma o metabolismo de forma natural',
+      'Cria hábito. A compulsão não volta no lugar',
+      'Emagrece de verdade. Sem definhar',
     ],
   },
 }
 
 export const xocanetaCosts = [
-  { label: '1 mês de caneta', value: '~ R$ 1.200', note: 'E no mês seguinte, de novo.' },
-  { label: '1 ano de caneta', value: '~ R$ 14 mil', note: 'Sem aprender a se alimentar.' },
+  { label: '1 mês de caneta', value: '~ R$ 1.500', note: 'E no mês seguinte, de novo.' },
+  { label: '1 ano de caneta', value: '~ R$ 18 mil', note: 'Sem aprender a se alimentar.' },
   { label: 'Choque na Black Friday', value: xocanetaFormatted.sale, note: '21 dias. Método. Pra vida.' },
 ]
 
@@ -90,7 +92,7 @@ export const xocanetaWeeks = [
   },
   {
     title: 'Proteína no centro',
-    text: 'Montar refeições que saciam de verdade. Fome controlada sem aplicador.',
+    text: 'Montar refeições que saciam de verdade. Fome controlada sem injeções.',
   },
   {
     title: 'Prazer sem culpa',
@@ -102,25 +104,3 @@ export const xocanetaWeeks = [
   },
 ]
 
-export const xocanetaFaq = [
-  {
-    q: 'Eu preciso jogar a caneta fora?',
-    a: 'Sim. A caneta não é o caminho. Se o emagrecimento depende de uma aplicação, o resultado não é seu: ele só dura enquanto você aplica. O Choque existe pra você aprender a comer e o metabolismo trabalhar sozinho, com comida de verdade.',
-  },
-  {
-    q: 'Funciona sem a caneta?',
-    a: 'Funciona. E é assim que tem que ser. O Choque no Metabolismo existe desde 2017, anos antes dessa febre. Mais de 10 mil mulheres já passaram pelo método comendo comida de verdade, sem passar fome.',
-  },
-  {
-    q: 'E se eu já usei a caneta e tenho medo de voltar?',
-    a: 'Aí esse programa é ainda mais pra você. A caneta não ensina a comer. Aqui você aprende o que fazer no prato para o resultado ficar com você, de verdade.',
-  },
-  {
-    q: 'É mais uma dieta restritiva?',
-    a: 'Não. Proteína no centro, refeições que saciam e versões prazerosas do que você ama. Emagrecer sem viver igual passarinho.',
-  },
-  {
-    q: 'E se eu não gostar?',
-    a: 'Garantia de 7 dias. Se não for pra você, peça o reembolso e receba 100% do valor de volta, sem perguntas.',
-  },
-]

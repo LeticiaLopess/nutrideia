@@ -29,7 +29,7 @@ export const methodPillars: MethodPillar[] = [
 export const metabolismShockSteps: string[] = [
   'Como reprogramar a mente para uma mente magra',
   'Receitas exclusivas para comer com prazer',
-  'Como reverter diabetes, SOP e hipertensão',
+  'Como combater diabetes, SOP e hipertensão',
   'Como manter a disciplina sem sofrimento',
   'Como montar sozinha o seu cardápio',
   'Como ser protagonista da sua própria vida',

@@ -7,6 +7,7 @@ const topRow = testimonials.filter((_, index) => index % 2 === 0)
 const bottomRow = testimonials.filter((_, index) => index % 2 === 1)
 
 type TestimonialsProps = {
+  heading?: ReactNode
   description?: ReactNode
   descriptionClassName?: string
   className?: string
@@ -17,6 +18,7 @@ type TestimonialsProps = {
 }
 
 export function Testimonials({
+  heading,
   description,
   descriptionClassName,
   className = 'bg-[#eef0f2]',
@@ -40,17 +42,21 @@ export function Testimonials({
               dark ? 'text-[#fdfaf0]' : 'text-neutral-900',
             )}
           >
-            <span className="font-semibold text-pink">+10.000</span> mulheres pelo mundo já viveram
-            essa{' '}
-            {accent === 'shock' ? (
-              <span className="font-black uppercase italic">transformação.</span>
-            ) : (
-              <GlowText
-                animated={false}
-                className="font-display mt-1 text-[1.3em] leading-none font-normal [text-shadow:0_0_18px_rgb(var(--glow-rgb)/0.25)]!"
-              >
-                <ScriptText>transformação.</ScriptText>
-              </GlowText>
+            {heading ?? (
+              <>
+                <span className="font-semibold text-pink">+10.000</span> mulheres pelo mundo já viveram
+                essa{' '}
+                {accent === 'shock' ? (
+                  <span className="font-black uppercase italic">transformação.</span>
+                ) : (
+                  <GlowText
+                    animated={false}
+                    className="font-display mt-1 text-[1.3em] leading-none font-normal [text-shadow:0_0_18px_rgb(var(--glow-rgb)/0.25)]!"
+                  >
+                    <ScriptText>transformação.</ScriptText>
+                  </GlowText>
+                )}
+              </>
             )}
           </h2>
 
@@ -58,7 +64,7 @@ export function Testimonials({
             className={cn(
               'mt-8 text-base leading-[1.6] lg:text-lg',
               dark ? 'text-[#fdfaf0]/70' : 'text-neutral-600',
-              descriptionClassName ?? 'max-w-2xl',
+              descriptionClassName ?? 'max-w-3xl',
             )}
           >
             {description ?? (

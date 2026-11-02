@@ -1,7 +1,12 @@
-import { useEffect, useState, type CSSProperties, type ReactNode } from 'react'
+import { useGSAP } from '@gsap/react'
+import gsap from 'gsap'
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
 import andreiaAbout from '../assets/images/andreia-about.jpg'
 import andreiaXocaneta from '../assets/images/andreia-xocaneta.png'
+import bgChristmas from '../assets/images/bg-christmas.jpg'
 import choqueMetabolismo from '../assets/images/choque-metabolismo.png'
+import ebookNatal from '../assets/images/ebook-natal.png'
+import floco from '../assets/images/floco.webp'
 import logoChoque from '../assets/images/logo-choque.png'
 import { FaithFoundation } from '../components/sections/FaithFoundation'
 import { Testimonials } from '../components/sections/Testimonials'
@@ -20,7 +25,6 @@ import { results } from '../data/results'
 import {
   xocanetaComparison,
   xocanetaCosts,
-  xocanetaFaq,
   xocanetaFormatted,
   xocanetaMarquee,
   xocanetaOffer,
@@ -28,6 +32,8 @@ import {
   xocanetaWeeks,
 } from '../data/xocaneta'
 import { cn } from '../lib/cn'
+
+gsap.registerPlugin(useGSAP)
 
 const checkout = xocanetaOffer.checkoutHref
 const endsAt = new Date(xocanetaOffer.endsAt)
@@ -80,11 +86,17 @@ export function Xocaneta() {
           accent="shock"
           badgeMarker="pen"
           className="bg-[#fce8f2]"
+          heading={
+            <>
+              <span className="font-semibold text-pink">+10.000</span> mulheres já emagreceram fora
+              do <Shock>padrão do mundo.</Shock>
+            </>
+          }
           description={
             <>
               Elas emagreceram com comida, método e mente renovada,{' '}
-              <strong className="font-semibold text-black">não com aplicador.</strong> Desde 2017, o
-              Choque no Metabolismo prova que dá pra sair da estagnação sem alugar o resultado.{' '}
+              <strong className="font-semibold text-black">não com canetas emagrecedoras.</strong> Desde 2017, o
+              Choque no Metabolismo prova que dá pra sair da estagnação sem camuflar o resultado.{' '}
               <span className="font-semibold text-black underline decoration-2 underline-offset-4">
                 Leia o que elas dizem.
               </span>
@@ -92,7 +104,7 @@ export function Xocaneta() {
           }
         />
         <Pricing />
-        <Faq />
+        <NatalBonus />
         <AboutAndreia />
         <FinalCall />
         <Disclaimer />
@@ -212,7 +224,7 @@ function TopBar() {
         <Container className="flex h-16 items-center justify-between">
           <a href="/xocaneta/" className="flex items-center gap-3">
             <img src={logoChoque} alt="Choque no Metabolismo" className="h-9 w-auto sm:h-10" />
-            <span className="hidden font-black tracking-[0.18em] text-black uppercase sm:inline">
+            <span className="hidden mt-1 font-black tracking-[0.18em] text-black uppercase sm:inline">
               Xô Caneta
             </span>
           </a>
@@ -232,7 +244,7 @@ function TopBar() {
 
 function Hero() {
   return (
-    <section className="relative isolate overflow-hidden bg-linear-to-br from-[#fdfaf0] via-[#fdfaf0] to-[#fce8f2] pt-32 sm:pt-36 lg:min-h-svh lg:pt-20">
+    <section className="relative isolate overflow-hidden bg-linear-to-br from-[#fdfaf0] via-[#fdfaf0] to-[#fce8f2] pt-32 sm:pt-36 lg:min-h-svh lg:pt-18">
       <Container className="relative grid items-end gap-8 md:grid-cols-[1.15fr_0.85fr] md:min-h-[calc(100svh-7rem)]">
         <div className="flex flex-col items-center self-center text-center md:items-start md:pb-16 md:text-left">
           <h1 className="max-w-3xl text-[2.6rem] leading-[0.92] font-black tracking-tight sm:text-6xl lg:text-[5.25rem]">
@@ -240,19 +252,18 @@ function Hero() {
           </h1>
 
           <p className="mt-7 max-w-xl text-lg leading-[1.45] font-medium text-black/80 sm:text-xl">
-            Você não precisa dela.{' '}
-            <strong className="text-black">Precisa da dieta certa</strong> e de um{' '}
-            <Shock>choque</Shock> no metabolismo.
+            Você não precisa de “canetinha”. Você só precisa aprender a{' '}
+            <strong className="text-black">ativar de forma natural</strong> os hormônios da
+            saciedade que o seu corpo já produz e a caneta só imita, porque ela é uma{' '}
+            <strong className="text-black">imitadora</strong> 👿
           </p>
 
           <p className="mt-5 max-w-lg text-base leading-[1.6] text-black/65">
-            A moda agora é aplicar, mas a verdade é outra: se sua mentalidade não muda, a caneta só{' '}
-            <strong className="text-black">aluga</strong> o seu resultado. Em 21 dias eu te ensino a
-            emagrecer com comida de verdade, do jeito que o corpo entende.
+            A moda agora é aplicar caneta e fazer cirurgias, mas a real é que elas não tratam a raiz do problema da obesidade.{' '} <strong>Existe um código por trás do emagrecimento definitivo e eu só preciso de 21 dias para você virar especialista nele.</strong> 
           </p>
 
           <Button href={checkout} size="lg" className="mt-8 max-sm:w-full max-sm:text-[15px]">
-            Quero mandar a caneta embora
+            Quero aprender o código
           </Button>
           <p className="mt-4 text-sm text-black/55">
             Na Black Friday, o Choque sai de {xocanetaFormatted.original} por {xocanetaFormatted.sale}.
@@ -278,16 +289,21 @@ function Truth() {
       <Container className="grid items-center gap-14 md:grid-cols-[1fr_1.05fr] lg:gap-20">
         <div className="flex flex-col items-start">
           <Badge marker="pen">A verdade</Badge>
-          <h2 className="mt-6 text-3xl leading-[1.12] font-medium sm:text-4xl lg:text-[2.75rem]">
-            A caneta não te ensina a comer.{' '}
-            <Shock>Ela só segura a fome.</Shock>
+          <h2 className="mt-6 max-w-lg text-3xl leading-[1.12] font-medium text-pretty sm:text-4xl lg:text-[2.75rem]">
+            A caneta mente pro seu cérebro.{' '}
+            <Shock className="mt-1 block">O corpo continua precisando.</Shock>
           </h2>
-          <p className="mt-8 max-w-xl text-base leading-[1.6] text-black/70 lg:text-lg">
-            A caneta virou o atalho da vez. Mas ela não ensina a comer e não reprograma o
-            metabolismo. Quando você para, o peso volta, porque o prato nunca mudou. Se você se
-            reconhece nisso, o problema nunca foi falta de caneta.{' '}
-            <strong className="font-semibold text-black">Foi falta de método.</strong> E isso ainda
-            pesa na saúde, até na visão.
+          <p className="mt-8 max-w-lg text-base leading-[1.6] text-pretty text-black/70 lg:text-lg">
+            O corpo é igual um carro: todo dia tem uma demanda de combustível (nutrientes) pra andar e a caneta
+            fala pro cérebro que essa demanda já foi cumprida.{' '}
+            <strong className="font-semibold text-black">É mentira.</strong> O corpo continua
+            pedindo e você não está suprindo.
+            <br />
+            <br />
+            Você emagrece, mas perde massa magra e nutrientes importantes junto.{' '}
+            <strong className="font-semibold text-black">
+              Isso não é emagrecer. É definhar. E quando você para de aplicar, volta muito pior: com o corpo fraco, frágil e uma fome fora de controle.
+            </strong>
           </p>
         </div>
 
@@ -295,7 +311,7 @@ function Truth() {
           {xocanetaPains.map((pain) => (
             <li
               key={pain}
-              className="flex items-start gap-4 rounded-2xl border border-black/10 bg-white/70 p-5 text-base leading-[1.4] lg:text-lg"
+              className="flex items-start gap-4 rounded-2xl border border-black/10 bg-white/70 p-5 text-base leading-[1.4] text-pretty lg:text-lg"
             >
               <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-[#fce8f2]">
                 <CrossIcon className="size-4" />
@@ -315,7 +331,7 @@ function Comparison() {
       <Container className="flex flex-col items-center">
         <Badge marker="pen">O caminho</Badge>
         <h2 className="mt-6 max-w-3xl text-center text-3xl leading-[1.12] font-medium sm:text-4xl lg:text-[2.75rem]">
-          Você pode alugar o resultado. Ou <Shock>aprender de verdade.</Shock>
+          Você pode camuflar o problema. <Shock>ou aprender de verdade.</Shock>
         </h2>
 
         <div className="mt-14 grid w-full gap-5 md:grid-cols-2 lg:mt-16">
@@ -361,8 +377,13 @@ function CostShock() {
         <Badge marker="pen" className="text-[#fce8f2]!">
           Faz a conta
         </Badge>
-        <h2 className="mt-6 max-w-3xl text-3xl leading-[1.12] font-medium sm:text-4xl lg:text-[2.75rem]">
-          A caneta come seu dinheiro. <Shock className="text-[#fce8f2]">O choque te ensina a comer.</Shock>
+        <h2 className="mt-6 max-w-4xl text-3xl leading-[1.12] font-medium sm:text-4xl lg:text-[2.75rem]">
+          A caneta te dá resultado temporário.
+          <Shock className="mt-2 block text-[#fce8f2]">
+            O choque te ensina
+            <br />
+            o emagrecimento definitivo.
+          </Shock>
         </h2>
 
         <dl className="mt-14 grid w-full gap-4 md:grid-cols-3">
@@ -408,7 +429,7 @@ function Learn() {
             O método
           </Badge>
           <h2 className="mt-6 text-3xl leading-[1.12] font-medium sm:text-4xl lg:text-[2.75rem]">
-            Em 21 dias, você para de procurar milagre e{' '}
+            Em 21 dias, você para de procurar atalhos e{' '}
             <Shock className="text-[#fce8f2]">aprende o método.</Shock>
           </h2>
         </div>
@@ -432,7 +453,7 @@ function Learn() {
           size="lg"
           className="mt-14 bg-[#fdfaf0]! text-black! shadow-none! hover:shadow-[0_0_36px_rgb(252_232_242/0.5)]! max-sm:w-full max-sm:text-[15px]"
         >
-          Quero aprender sem caneta
+          Quero aprender o método
         </Button>
       </Container>
     </Section>
@@ -478,8 +499,8 @@ function ResultsStrip() {
     <Section id="resultados" className="bg-[#fdfaf0]">
       <Container className="flex flex-col items-center">
         <Badge marker="pen">Resultados</Badge>
-        <h2 className="mt-6 max-w-3xl text-center text-3xl leading-[1.12] font-medium sm:text-4xl lg:text-[2.75rem]">
-          Corpo que muda porque a mente e o prato mudaram. <Shock>Sem aplicador.</Shock>
+        <h2 className="mt-6 max-w-2xl text-center text-3xl leading-[1.12] font-medium sm:text-4xl lg:text-[2.75rem]">
+          Corpo que muda porque a mente e o prato mudaram. <Shock>Sem injeções.</Shock>
         </h2>
       </Container>
 
@@ -609,29 +630,242 @@ function Pricing() {
   )
 }
 
-function Faq() {
+function NatalBonus() {
+  const sectionRef = useRef<HTMLElement>(null)
+  const flakes = Array.from({ length: 18 }, (_, index) => index)
+
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia()
+
+      mm.add('(prefers-reduced-motion: no-preference)', () => {
+        const snowflakes = gsap.utils.toArray<HTMLElement>('.natal-flake')
+        snowflakes.forEach((flake, index) => {
+          const size = 14 + (index % 5) * 4
+          const startX = gsap.utils.random(2, 98)
+          const drift = gsap.utils.random(-70, 70)
+          const duration = gsap.utils.random(5.5, 11)
+          const delay = gsap.utils.random(0, 7)
+          const fallDistance = () => (sectionRef.current?.offsetHeight ?? 700) + 120
+
+          gsap.set(flake, {
+            left: `${startX}%`,
+            top: 0,
+            width: size,
+            height: size,
+            opacity: gsap.utils.random(0.35, 0.8),
+          })
+
+          gsap.fromTo(
+            flake,
+            { y: gsap.utils.random(-120, -30), x: 0, rotation: 0 },
+            {
+              y: fallDistance,
+              x: drift,
+              rotation: gsap.utils.random(-180, 180),
+              duration,
+              delay,
+              ease: 'none',
+              repeat: -1,
+            },
+          )
+        })
+
+        gsap.fromTo(
+          '.natal-ebook',
+          { opacity: 0, y: 48, rotation: -10, scale: 0.88 },
+          {
+            opacity: 1,
+            y: 0,
+            rotation: -3,
+            scale: 1,
+            duration: 1.05,
+            ease: 'back.out(1.6)',
+          },
+        )
+
+        gsap.to('.natal-ebook', {
+          y: -10,
+          duration: 2.2,
+          ease: 'sine.inOut',
+          yoyo: true,
+          repeat: -1,
+          delay: 1.1,
+        })
+
+        gsap.fromTo(
+          '.natal-ebook-glow',
+          { opacity: 0.35, scale: 1 },
+          {
+            opacity: 0.55,
+            scale: 1.03,
+            duration: 2,
+            ease: 'sine.inOut',
+            yoyo: true,
+            repeat: -1,
+          },
+        )
+
+        gsap.fromTo(
+          '.natal-copy > *',
+          { opacity: 0, y: 28 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            stagger: 0.12,
+            ease: 'power3.out',
+            delay: 0.25,
+            clearProps: 'transform',
+          },
+        )
+
+        gsap.to('.natal-badge', {
+          scale: 1.025,
+          duration: 0.75,
+          ease: 'sine.inOut',
+          yoyo: true,
+          repeat: -1,
+        })
+
+        const lightRed = '#ffb3b3'
+        gsap.utils.toArray<HTMLElement>('.natal-letter').forEach((letter, index) => {
+          if (letter.textContent === '\u00A0') return
+
+          gsap.set(letter, {
+            color: lightRed,
+            opacity: 1,
+            autoAlpha: 1,
+            filter: 'none',
+            textShadow: `0 0 6px ${lightRed}55`,
+          })
+
+          gsap.to(letter, {
+            textShadow: `0 0 16px ${lightRed}`,
+            duration: 0.9,
+            delay: (index % 4) * 0.2,
+            ease: 'sine.inOut',
+            yoyo: true,
+            repeat: -1,
+          })
+        })
+
+        gsap.fromTo(
+          '.natal-cta',
+          { boxShadow: '0 0 0 0 rgba(196,18,47,0.55)' },
+          {
+            boxShadow: '0 0 0 18px rgba(196,18,47,0)',
+            duration: 1.5,
+            ease: 'power1.out',
+            repeat: -1,
+          },
+        )
+
+        gsap.fromTo(
+          '.natal-spark',
+          { opacity: 0.15, scale: 0.4 },
+          {
+            opacity: 1,
+            scale: 1.4,
+            duration: 0.7,
+            stagger: { each: 0.18, repeat: -1, yoyo: true },
+            ease: 'sine.inOut',
+          },
+        )
+      })
+
+      return () => mm.revert()
+    },
+    { scope: sectionRef },
+  )
+
   return (
-    <Section id="faq" className="bg-[#fdfaf0]">
-      <Container className="mx-auto max-w-3xl">
-        <div className="flex flex-col items-center text-center">
-          <Badge marker="pen">Dúvidas</Badge>
-          <h2 className="mt-6 text-3xl leading-[1.12] font-medium sm:text-4xl">
-            Antes de cair no papo da <Strike>farmácia</Strike>
-          </h2>
+    <Section
+      ref={sectionRef}
+      id="bonus-natal"
+      className="relative overflow-hidden bg-[#1a0610] text-[#fdfaf0]"
+    >
+      <img
+        src={bgChristmas}
+        alt=""
+        aria-hidden="true"
+        className="absolute inset-0 size-full scale-110 object-cover object-center contrast-125 brightness-[0.4]"
+      />
+      <span
+        aria-hidden="true"
+        className="absolute inset-0 bg-linear-to-br from-[#3a0a1a]/90 via-black/80 to-[#1a0610]/95"
+      />
+
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+        {flakes.map((flake) => (
+          <img
+            key={flake}
+            src={floco}
+            alt=""
+            className="natal-flake absolute object-contain mix-blend-screen"
+            draggable={false}
+          />
+        ))}
+        {Array.from({ length: 8 }, (_, index) => (
+          <img
+            key={`spark-${index}`}
+            src={floco}
+            alt=""
+            className="natal-spark absolute size-3 object-contain mix-blend-screen sm:size-3.5"
+            style={{
+              left: `${12 + index * 11}%`,
+              top: `${18 + (index % 4) * 18}%`,
+            }}
+            draggable={false}
+          />
+        ))}
+      </div>
+
+      <Container className="relative grid items-center gap-10 py-6 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+        <div className="natal-ebook relative mx-auto w-full max-w-[14rem] sm:max-w-[16rem] lg:max-w-[22rem]">
+          <span
+            aria-hidden="true"
+            className="natal-ebook-glow absolute -inset-5 rounded-[1.75rem] bg-[#e6007e]/20 blur-3xl"
+          />
+          <div className="relative overflow-hidden rounded-2xl border-2 border-[#fce8f2]/50 bg-[#fdfaf0]/5 p-1.5 shadow-[0_0_24px_rgb(230_0_126/0.18)]">
+            <img
+              src={ebookNatal}
+              alt="Capa do ebook de receitas natalinas"
+              loading="lazy"
+              className="w-full rounded-xl object-cover"
+            />
+          </div>
         </div>
 
-        <div className="mt-12">
-          {xocanetaFaq.map((item) => (
-            <details key={item.q} className="group border-t border-black/10 py-5">
-              <summary className="flex cursor-pointer list-none items-start justify-between gap-4 text-left text-lg font-semibold marker:content-none [&::-webkit-details-marker]:hidden">
-                {item.q}
-                <span className="mt-1 shrink-0 text-black transition-transform group-open:rotate-45">
-                  +
+        <div className="natal-copy flex flex-col items-center text-center lg:items-start lg:text-left">
+          <p className="natal-badge rounded-full border border-[#ffb3b3]/40 bg-[#7a1028] px-4 py-1.5 text-[11px] font-black tracking-[0.35em] text-[#ffe4e8] uppercase shadow-[0_0_18px_rgb(122_16_40/0.45)]">
+            Bônus de Natal
+          </p>
+          <h2 className="mt-6 max-w-2xl text-3xl leading-[1.12] font-medium sm:text-4xl lg:text-[2.75rem]">
+            Dentro do Choque, você também leva o{' '}
+            <Shock className="natal-title-accent">
+              {'ebook de receitas natalinas.'.split('').map((char, index) => (
+                <span
+                  key={`${char}-${index}`}
+                  className={cn('natal-letter inline-block', char === ' ' && 'w-[0.28em]')}
+                  style={{ color: '#ffb3b3', opacity: 1 }}
+                >
+                  {char === ' ' ? '\u00A0' : char}
                 </span>
-              </summary>
-              <p className="mt-3 max-w-2xl pb-2 text-base leading-[1.6] text-black/65">{item.a}</p>
-            </details>
-          ))}
+              ))}
+            </Shock>
+          </h2>
+          <p className="mt-6 max-w-xl text-base leading-[1.6] text-[#fdfaf0]/75 lg:text-lg">
+            Ceia com sabor de festa e proteína no prato. Pra emagrecer sem abrir mão da noite mais
+            especial do ano.
+          </p>
+          <Button
+            href={checkout}
+            size="lg"
+            className="natal-cta relative z-10 mt-8 bg-[#c4122f]! text-white! opacity-100! shadow-[0_0_28px_rgb(196_18_47/0.55)]! hover:bg-[#de1a3a]! max-sm:w-full max-sm:text-[15px]"
+          >
+            Quero o Choque com o bônus de Natal
+          </Button>
         </div>
       </Container>
     </Section>
@@ -642,7 +876,7 @@ function AboutAndreia() {
   return (
     <Section id="sobre" className="bg-[#fdfaf0]">
       <Container className="grid items-center gap-16 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
-        <div className="relative mx-auto w-full max-w-sm lg:order-2">
+        <figure className="relative mx-auto w-full max-w-sm lg:order-2">
           <span
             aria-hidden="true"
             className="absolute -right-4 -bottom-4 -z-10 size-full rounded-3xl bg-[#fce8f2]"
@@ -653,30 +887,34 @@ function AboutAndreia() {
             loading="lazy"
             className="aspect-[4/5] w-full rounded-3xl object-cover object-top"
           />
-        </div>
+          <figcaption className="mt-4 text-center text-sm font-semibold tracking-[0.2em] text-black/70 uppercase">
+            Andreia Oliveira
+          </figcaption>
+        </figure>
 
         <div className="flex flex-col items-start lg:order-1">
           <Badge marker="pen">Quem guia a jornada</Badge>
-          <h2 className="mt-6 text-3xl leading-[1.12] font-medium sm:text-4xl lg:text-[2.75rem]">
-            Eu já fui obesa, diabética e hipertensa. <Shock>Sem caneta.</Shock>
+          <h2 className="mt-6 text-3xl leading-[1.12] font-medium sm:text-4xl lg:text-[2.6rem]">
+            Eu já fui obesa, diabética e hipertensa. E mudei tudo isso{' '}
+            <Shock>sem caneta e sem cirurgias.</Shock>
           </h2>
 
           <div className="mt-10 flex max-w-[34rem] flex-col gap-5 text-base leading-[1.6] text-black/70">
             <p>
               Sou nutricionista, mas conheço esse caminho por dentro. Por muito tempo convivi com a
-              autoestima no chão e com dietas que eu não sustentava. Reverti a diabetes com comida,
+              autoestima no chão e com dietas que eu não sustentava. Reverti a SOP e diabetes com comida,
               método e renovação da mente.
             </p>
             <p>
               Desde 2017 o <strong className="font-semibold text-black">Método Nutrideia</strong> já
-              ajudou milhares de pessoas a emagrecer sem abrir mão do prazer de comer. O Choque no
-              Metabolismo é onde eu aplico isso com você, dia após dia,{' '}
-              <strong className="font-semibold text-black">sem te vender uma caneta.</strong>
+              ajudou milhares de pessoas a emagrecer sem abrir mão do prazer de comer. No Choque no
+              Metabolismo, em 21 dias, eu te ensino esse método{' '}
+              <strong className="font-semibold text-black">pra você carregar pra vida.</strong>
             </p>
           </div>
 
           <Button href={checkout} size="lg" className="mt-10 max-sm:w-full max-sm:text-[15px]">
-            Quero fazer o choque com a Déia
+            Quero fazer o choque com a Nutrideia
           </Button>
         </div>
       </Container>
