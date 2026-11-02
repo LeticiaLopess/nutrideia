@@ -1,7 +1,7 @@
 import { cn } from '../../lib/cn'
 import { Container } from '../ui'
 
-const instagramHref = 'https://www.instagram.com/dewelops/'
+const instagramHref = 'https://www.instagram.com/dewelops_/'
 const siteHref = 'https://www.dewelops.com'
 
 type SiteCreditProps = {
@@ -43,7 +43,7 @@ export function SiteCredit({ className, tone = 'light', bare = false }: SiteCred
         rel="noopener noreferrer"
         className={cn('transition-colors', dark ? 'hover:text-white/70' : 'hover:text-black/60')}
       >
-        @dewelops
+        @dewelops_
       </a>
       <span aria-hidden="true">·</span>
       <a
