@@ -3,7 +3,7 @@ import andreiaBlackDress from '../../assets/images/andreia-black-dress.png'
 import { cn } from '../../lib/cn'
 import { Badge, Container, GlowText, ScriptText, Section } from '../ui'
 
-type FaithVariant = 'home' | 'choque' | 'cozinha' | 'terapia'
+type FaithVariant = 'home' | 'choque' | 'cozinha' | 'terapia' | 'xocaneta'
 
 const copy: Record<
   FaithVariant,
@@ -54,6 +54,26 @@ const copy: Record<
         <strong className="font-semibold text-white">Romanos 12:2</strong> é a base da Nutrideia:
         renovar a mente para transformar a maneira como você se cuida. E, na nossa cozinha, você
         aprende a colocar essa mudança em prática.
+      </>
+    ),
+  },
+  xocaneta: {
+    badge: 'O fundamento',
+    lead: 'O padrão deste mundo agora é a caneta. Você não precisa se',
+    script: 'amoldar.',
+    body: (
+      <>
+        O problema nunca foi apenas o que você come, mas a forma como você pensa, as escolhas que
+        faz e os hábitos que repete todos os dias. É por isso que, em 21 dias, vamos trabalhar sua
+        mente e sua alimentação juntas, porque você precisa aprender a cuidar do seu corpo, e não
+        viver procurando o próximo atalho para emagrecer.
+        <br />
+        <br />
+        <strong className="font-semibold text-[#fdfaf0]">
+          Emagrecimento baseado em Romanos 12:2
+        </strong>
+        : pare de se amoldar aos padrões e às soluções imediatistas deste mundo e renove sua mente
+        para transformar a maneira como você come, pensa e cuida do corpo que Deus lhe deu.
       </>
     ),
   },
@@ -121,6 +141,15 @@ const styles: Record<
     verse: 'text-neutral-100',
     cite: 'text-pink',
   },
+  xocaneta: {
+    section: 'bg-black text-[#fdfaf0]',
+    heading: 'text-[#fdfaf0]',
+    body: 'text-[#fdfaf0]/75',
+    verseBox: 'border-[#fce8f2]/25 bg-white/[0.04]',
+    verse: 'text-[#fdfaf0]',
+    cite: 'text-[#fce8f2]',
+    badgeClassName: 'text-white!',
+  },
   terapia: {
     section: 'bg-[#f2f2ef] text-[#060606]',
     heading: 'text-[#060606]',
@@ -145,7 +174,7 @@ export function FaithFoundation({ variant = 'home' }: { variant?: FaithVariant }
             'w-full',
             hasImage
               ? 'grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16'
-              : variant === 'choque'
+              : variant === 'choque' || variant === 'xocaneta'
                 ? 'flex max-w-4xl flex-col items-center text-center'
                 : 'flex max-w-3xl flex-col items-center text-center',
           )}
@@ -156,12 +185,14 @@ export function FaithFoundation({ variant = 'home' }: { variant?: FaithVariant }
               hasImage ? 'items-start text-left' : 'items-center text-center',
             )}
           >
-            <Badge className={theme.badgeClassName}>{content.badge}</Badge>
+            <Badge marker={variant === 'xocaneta' ? 'pen' : 'bolt'} className={theme.badgeClassName}>
+              {content.badge}
+            </Badge>
 
             <h2
               className={cn(
                 'mt-6 text-3xl leading-[1.15] font-medium tracking-tight sm:text-4xl lg:text-[2.75rem]',
-                variant === 'choque'
+                variant === 'choque' || variant === 'xocaneta'
                   ? 'max-w-4xl'
                   : variant === 'terapia'
                     ? 'max-w-md lg:max-w-xl'
@@ -170,7 +201,7 @@ export function FaithFoundation({ variant = 'home' }: { variant?: FaithVariant }
               )}
             >
               {content.lead}{' '}
-              {variant === 'choque' ? (
+              {variant === 'choque' || variant === 'xocaneta' ? (
                 <span className="font-black uppercase italic text-[#fce8f2]">{content.script}</span>
               ) : (
                 <GlowText
@@ -188,7 +219,7 @@ export function FaithFoundation({ variant = 'home' }: { variant?: FaithVariant }
             <p
               className={cn(
                 'mt-8 text-base leading-[1.6] lg:text-lg',
-                hasImage ? 'max-w-xl' : 'max-w-2xl',
+                hasImage ? 'max-w-xl' : variant === 'xocaneta' ? 'max-w-3xl' : 'max-w-2xl',
                 theme.body,
               )}
             >

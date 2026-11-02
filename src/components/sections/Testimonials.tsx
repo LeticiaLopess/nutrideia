@@ -12,6 +12,8 @@ type TestimonialsProps = {
   className?: string
   /** Choque usa tipografia bold italic em vez da script cursiva */
   accent?: 'script' | 'shock'
+  tone?: 'light' | 'dark'
+  badgeMarker?: 'bolt' | 'pen'
 }
 
 export function Testimonials({
@@ -19,14 +21,25 @@ export function Testimonials({
   descriptionClassName,
   className = 'bg-[#eef0f2]',
   accent = 'script',
+  tone = 'light',
+  badgeMarker = 'bolt',
 }: TestimonialsProps) {
+  const dark = tone === 'dark'
+
   return (
     <Section id="depoimentos" className={cn('pt-4 lg:pt-8', className)}>
       <Container className="flex flex-col items-center">
         <div className="flex max-w-3xl mt-20 flex-col items-center text-center">
-          <Badge>Depoimentos</Badge>
+          <Badge marker={badgeMarker} className={dark ? 'text-gold!' : undefined}>
+            Depoimentos
+          </Badge>
 
-          <h2 className="mt-6 text-3xl leading-none font-medium text-neutral-900 sm:text-4xl lg:text-[2.75rem]">
+          <h2
+            className={cn(
+              'mt-6 text-3xl leading-none font-medium sm:text-4xl lg:text-[2.75rem]',
+              dark ? 'text-[#fdfaf0]' : 'text-neutral-900',
+            )}
+          >
             <span className="font-semibold text-pink">+10.000</span> mulheres pelo mundo já viveram
             essa{' '}
             {accent === 'shock' ? (
@@ -43,7 +56,8 @@ export function Testimonials({
 
           <p
             className={cn(
-              'mt-8 text-base leading-[1.6] text-neutral-600 lg:text-lg',
+              'mt-8 text-base leading-[1.6] lg:text-lg',
+              dark ? 'text-[#fdfaf0]/70' : 'text-neutral-600',
               descriptionClassName ?? 'max-w-2xl',
             )}
           >

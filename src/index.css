@@ -23,6 +23,7 @@
   --color-cta: #e6007e;
   --color-graphite: #575756;
   --color-cozinha-brown: #59483d;
+  --color-gold: #e8c547;
 
   --font-sans: 'Montserrat', 'Segoe UI', system-ui, sans-serif;
   --font-display: 'Right Female', cursive;
@@ -30,6 +31,8 @@
   --animate-shine: shine 2.4s ease-in-out infinite;
   --animate-marquee: marquee var(--marquee-duration, 45s) linear infinite;
   --animate-badge-float: badge-float 2.8s ease-in-out infinite;
+  --animate-xocaneta-pulse: xocaneta-pulse 1.8s ease-in-out infinite;
+  --animate-bf-flash: bf-flash 1.4s ease-in-out infinite;
 
   @keyframes marquee {
     from {
@@ -64,6 +67,26 @@
       text-shadow:
         0 0 2px rgb(var(--glow-rgb) / 0.3),
         0 0 6px rgb(var(--glow-rgb) / 0.2);
+    }
+  }
+
+  @keyframes xocaneta-pulse {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 rgb(230 0 126 / 0.55);
+    }
+    70% {
+      box-shadow: 0 0 0 14px rgb(230 0 126 / 0);
+    }
+  }
+
+  @keyframes bf-flash {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    45% {
+      opacity: 0.55;
     }
   }
 }
@@ -211,6 +234,7 @@
   --cta-rgb: 230 0 126;
 }
 
+
 @layer base {
   html.theme-cozinha {
     background-color: #141414;
@@ -219,6 +243,10 @@
   html.theme-choque {
     background-color: #fdfaf0;
     color: #000000;
+  }
+
+  html.theme-choque.xocaneta-page {
+    scroll-padding-top: 7rem;
   }
 
   html.theme-terapia {
