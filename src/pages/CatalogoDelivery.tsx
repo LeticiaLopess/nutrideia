@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import andreiaHistory from '../assets/images/andreia-history.jpeg'
 import logo from '../assets/images/logo.png'
+import { SiteCredit } from '../components/layout/SiteCredit'
 import { Badge, Button, Container, LineIcon, ScriptText, Section } from '../components/ui'
 import {
   cakeMacrosNote,
@@ -94,7 +95,8 @@ export function CatalogoDelivery() {
         <Closing />
       </main>
 
-      <SiteFooter hasCartBar={totalItems > 0} />
+      <SiteFooter hasCartBar={false} />
+      <SiteCredit className={cn('bg-[#fff7fa]', totalItems > 0 && 'pb-24')} />
       {totalItems > 0 && (
         <CartBar
           totalItems={totalItems}

@@ -4,6 +4,7 @@ import bgChristmas from '../assets/images/bg-christmas.jpg'
 import cozinhaNutrideia from '../assets/images/cozinha-nutrideia.png'
 import logoCozinha from '../assets/images/logo-cozinha.png'
 import womanPants from '../assets/images/woman-pants.png'
+import { SiteCredit } from '../components/layout/SiteCredit'
 import { FaithFoundation } from '../components/sections/FaithFoundation'
 import { Testimonials } from '../components/sections/Testimonials'
 import {
@@ -121,6 +122,7 @@ export function CozinhaNutrideia() {
         <FinalCall />
         <GinghamStrip />
         <AboutAndreia />
+        <SiteCredit tone="dark" className="bg-[#141414]" />
       </main>
 
       <MobileBuyBar />

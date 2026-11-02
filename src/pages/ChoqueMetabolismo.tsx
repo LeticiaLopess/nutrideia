@@ -3,6 +3,7 @@ import andreiaAbout from '../assets/images/andreia-about.jpg'
 import andreiaChoque from '../assets/images/andreia-choque.png'
 import choqueMetabolismo from '../assets/images/choque-metabolismo.png'
 import logoChoque from '../assets/images/logo-choque.png'
+import { SiteCredit } from '../components/layout/SiteCredit'
 import { FaithFoundation } from '../components/sections/FaithFoundation'
 import { Testimonials } from '../components/sections/Testimonials'
 import { Badge, Button, CheckIcon, Container, CrossIcon, LineIcon, Section } from '../components/ui'
@@ -85,6 +86,7 @@ export function ChoqueMetabolismo() {
         <Pricing />
         <FinalCall />
         <AboutAndreia />
+        <SiteCredit className="bg-[#fdfaf0]" />
       </main>
 
       <MobileBuyBar />

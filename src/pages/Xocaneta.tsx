@@ -8,6 +8,7 @@ import choqueMetabolismo from '../assets/images/choque-metabolismo.png'
 import ebookNatal from '../assets/images/ebook-natal.png'
 import floco from '../assets/images/floco.webp'
 import logoChoque from '../assets/images/logo-choque.png'
+import { SiteCredit } from '../components/layout/SiteCredit'
 import { FaithFoundation } from '../components/sections/FaithFoundation'
 import { Testimonials } from '../components/sections/Testimonials'
 import {
@@ -107,7 +108,7 @@ export function Xocaneta() {
         <NatalBonus />
         <AboutAndreia />
         <FinalCall />
-        <Disclaimer />
+        <SiteCredit className="bg-[#fdfaf0]" />
       </main>
       <MobileBuyBar />
     </>
@@ -841,16 +842,27 @@ function NatalBonus() {
           <p className="natal-badge rounded-full border border-[#ffb3b3]/40 bg-[#7a1028] px-4 py-1.5 text-[11px] font-black tracking-[0.35em] text-[#ffe4e8] uppercase shadow-[0_0_18px_rgb(122_16_40/0.45)]">
             Bônus de Natal
           </p>
-          <h2 className="mt-6 max-w-2xl text-3xl leading-[1.12] font-medium sm:text-4xl lg:text-[2.75rem]">
+          <h2 className="mt-6 max-w-2xl text-[1.75rem] leading-[1.12] font-medium sm:text-4xl lg:text-[2.75rem]">
             Dentro do Choque, você também leva o{' '}
             <Shock className="natal-title-accent">
-              {'ebook de receitas natalinas.'.split('').map((char, index) => (
-                <span
-                  key={`${char}-${index}`}
-                  className={cn('natal-letter inline-block', char === ' ' && 'w-[0.28em]')}
-                  style={{ color: '#ffb3b3', opacity: 1 }}
-                >
-                  {char === ' ' ? '\u00A0' : char}
+              {'ebook de receitas natalinas.'.split(' ').map((word, wordIndex, words) => (
+                <span key={`${word}-${wordIndex}`} className="inline-block whitespace-nowrap">
+                  {word.split('').map((char, charIndex) => {
+                    const index =
+                      words.slice(0, wordIndex).join(' ').length +
+                      (wordIndex > 0 ? 1 : 0) +
+                      charIndex
+                    return (
+                      <span
+                        key={`${char}-${index}`}
+                        className="natal-letter inline-block"
+                        style={{ color: '#ffb3b3', opacity: 1 }}
+                      >
+                        {char}
+                      </span>
+                    )
+                  })}
+                  {wordIndex < words.length - 1 ? '\u00A0' : null}
                 </span>
               ))}
             </Shock>
@@ -864,7 +876,8 @@ function NatalBonus() {
             size="lg"
             className="natal-cta relative z-10 mt-8 bg-[#c4122f]! text-white! opacity-100! shadow-[0_0_28px_rgb(196_18_47/0.55)]! hover:bg-[#de1a3a]! max-sm:w-full max-sm:text-[15px]"
           >
-            Quero o Choque com o bônus de Natal
+            <span className="sm:hidden">Quero o bônus de Natal</span>
+            <span className="max-sm:hidden">Quero o Choque com o bônus de Natal</span>
           </Button>
         </div>
       </Container>
@@ -914,7 +927,8 @@ function AboutAndreia() {
           </div>
 
           <Button href={checkout} size="lg" className="mt-10 max-sm:w-full max-sm:text-[15px]">
-            Quero fazer o choque com a Nutrideia
+            <span className="sm:hidden">Quero fazer o choque</span>
+            <span className="max-sm:hidden">Quero fazer o choque com a Nutrideia</span>
           </Button>
         </div>
       </Container>
@@ -943,18 +957,6 @@ function FinalCall() {
         <Guarantee />
       </Container>
     </Section>
-  )
-}
-
-function Disclaimer() {
-  return (
-    <footer className="border-t border-black/10 bg-[#fdfaf0] py-10">
-      <Container>
-        <p className="mx-auto max-w-3xl text-center text-xs leading-[1.6] text-black/40">
-          Xô Caneta. Choque no Metabolismo. Nutrideia. Black Friday 2026.
-        </p>
-      </Container>
-    </footer>
   )
 }
 

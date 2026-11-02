@@ -2,6 +2,7 @@ import andreiaAbout from '../assets/images/andreia-about.jpg'
 import andreiaTerapia from '../assets/images/andreia-terapia.png'
 import logoTerapia from '../assets/images/logo-terapia.png'
 import terapiaEmagrecimento from '../assets/images/terapia-emagrecimento.png'
+import { SiteCredit } from '../components/layout/SiteCredit'
 import { FaithFoundation } from '../components/sections/FaithFoundation'
 import { Testimonials } from '../components/sections/Testimonials'
 import {
@@ -132,6 +133,7 @@ export function TerapiaEmagrecimento() {
         <Pricing />
         <Faq />
         <AboutAndreia />
+        <SiteCredit className="bg-[#f2f2ef]" />
       </main>
 
       <MobileBuyBar />
@@ -150,7 +152,7 @@ function ScarcityNote() {
 
 function Hero() {
   return (
-    <section className="relative isolate overflow-hidden bg-[#f2f2ef] pt-32 text-[#060606] lg:min-h-svh lg:pt-20">
+    <section className="relative isolate overflow-hidden bg-[#f2f2ef] pt-36 text-[#060606] lg:min-h-svh lg:pt-32">
       <Container className="grid items-end gap-10 lg:min-h-[calc(100svh-5rem)] lg:grid-cols-[1.1fr_1fr] lg:gap-6">
         <div className="flex flex-col items-center self-center text-center lg:items-start lg:pb-16 lg:text-left">
           <h1 className="max-w-3xl text-3xl leading-[1.1] font-medium tracking-tight sm:text-4xl lg:text-6xl lg:leading-[1.05]">

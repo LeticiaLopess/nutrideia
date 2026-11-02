@@ -1,4 +1,5 @@
 import { Header } from './components/layout/Header'
+import { SiteCredit } from './components/layout/SiteCredit'
 import { About } from './components/sections/About'
 import { Challenge } from './components/sections/Challenge'
 import { FaithFoundation } from './components/sections/FaithFoundation'
@@ -31,6 +32,7 @@ function App() {
         <Challenge />
         <Offers />
         <About />
+        <SiteCredit className="bg-[#fff7fa]" />
       </main>
     </>
   )

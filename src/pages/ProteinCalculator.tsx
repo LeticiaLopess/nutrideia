@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { SiteCredit } from '../components/layout/SiteCredit'
 import { Container, GlowText, RadialGlow, ScriptText } from '../components/ui'
 
 const PROTEIN_PER_KG = 2
@@ -71,6 +72,8 @@ export function ProteinCalculator() {
           </div>
         </form>
       </Container>
+
+      <SiteCredit tone="dark" className="mt-auto" />
     </main>
   )
 }
