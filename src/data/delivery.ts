@@ -308,7 +308,7 @@ export const deliveryProducts: DeliveryProduct[] = [
     category: 'Doces',
     description: 'Um bolo de pote super molhadinho, pra comer de colher.',
     serving: '1 potinho | 25 g de proteína',
-    price: 25,
+    price: 33,
     image: potinhoChocolate,
     ingredients: [
       'farinha de amêndoas',
@@ -327,7 +327,7 @@ export const deliveryProducts: DeliveryProduct[] = [
     category: 'Doces',
     description: 'Um bolo de pote super molhadinho, com sabor de paçoca.',
     serving: '1 potinho | 25 g de proteína',
-    price: 25,
+    price: 33,
     image: potinhoAmendoim,
     ingredients: [
       'farinha de amendoim torrado com pele',
@@ -345,7 +345,7 @@ export const deliveryProducts: DeliveryProduct[] = [
     category: 'Doces',
     description: 'Um bolo de pote super molhadinho, com creme de brigadeiro branco.',
     serving: '1 potinho | 25 g de proteína',
-    price: 25,
+    price: 33,
     image: potinhoBrigadeiroBranco,
     ingredients: [
       'farinha de amêndoas',
