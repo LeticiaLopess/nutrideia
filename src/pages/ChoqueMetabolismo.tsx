@@ -124,9 +124,9 @@ function Guarantee({ className }: { className?: string }) {
 
 function Hero() {
   return (
-    <section className="relative isolate overflow-hidden bg-linear-to-br from-[#fdfaf0] via-[#fdfaf0] to-[#fce8f2] pt-32 lg:min-h-svh lg:pt-20">
+    <section className="relative isolate overflow-hidden bg-linear-to-br from-[#fdfaf0] via-[#fdfaf0] to-[#fce8f2] pt-28 lg:min-h-svh lg:pt-20">
       <Container className="grid items-end gap-6 lg:min-h-[calc(100svh-5rem)] lg:grid-cols-[1.1fr_1fr]">
-        <div className="flex flex-col items-center self-center text-center lg:items-start lg:pb-16 lg:text-left">
+        <div className="flex flex-col items-center self-center text-center lg:items-start lg:pb-32 lg:text-left">
           <h1 className="max-w-3xl text-[2.125rem] leading-[1.1] font-medium sm:text-[2.75rem] lg:text-[3.25rem]">
             Dê um <Shock>choque</Shock> no seu metabolismo{' '}
             <Highlight>em 21 dias.</Highlight>

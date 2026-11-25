@@ -36,12 +36,18 @@ export const xocanetaFormatted = {
   installment: formatInstallment(xocanetaOffer.salePrice, xocanetaOffer.installments),
 }
 
+export const xocanetaDiscountPercent = Math.round(
+  (1 - xocanetaOffer.salePrice / xocanetaOffer.originalPrice) * 100,
+)
+
 export const xocanetaMarquee = [
   'BLACK FRIDAY',
+  'CONDIÇÃO ESPECIAL',
+  `DE R$ ${xocanetaOffer.originalPrice} POR R$ ${xocanetaOffer.salePrice}`,
+  'ACABA EM BREVE',
   'XÔ CANETA',
   'CHOQUE NO METABOLISMO',
-  'CONDIÇÃO ESPECIAL',
-  '21 DIAS',
+  'DESAFIO DE 21 DIAS',
   'SEM CANETA',
   'COMIDA DE VERDADE',
 ]

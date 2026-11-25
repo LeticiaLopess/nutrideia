@@ -284,6 +284,14 @@
 @layer base {
   html.theme-cozinha {
     background-color: #141414;
+    scroll-behavior: smooth;
+    scroll-padding-top: 7.5rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html.theme-cozinha {
+      scroll-behavior: auto;
+    }
   }
 
   html.theme-choque {

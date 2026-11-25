@@ -5,6 +5,7 @@ import cozinhaNutrideia from '../assets/images/cozinha-nutrideia.png'
 import logoCozinha from '../assets/images/logo-cozinha.png'
 import womanPants from '../assets/images/woman-pants.png'
 import { SiteCredit } from '../components/layout/SiteCredit'
+import { cn } from '../lib/cn'
 import { FaithFoundation } from '../components/sections/FaithFoundation'
 import { Testimonials } from '../components/sections/Testimonials'
 import {
@@ -24,7 +25,30 @@ import { offers } from '../data/offers'
 
 const product = offers.find((offer) => offer.name === 'Cozinha Nutrideia')!
 
-const formattedPrice = product.price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+const formatBRL = (value: number) =>
+  value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+
+const blackFriday = {
+  original: product.price,
+  sale: 297,
+  installments: 3,
+}
+
+const discountPercent = Math.round((1 - blackFriday.sale / blackFriday.original) * 100)
+
+const price = {
+  original: formatBRL(blackFriday.original),
+  sale: formatBRL(blackFriday.sale),
+  saleShort: `R$ ${blackFriday.sale}`,
+  originalShort: `R$ ${blackFriday.original}`,
+}
+
+const navLinks = [
+  { href: '#receitas', label: 'Receitas' },
+  { href: '#como-funciona', label: 'Como funciona' },
+  { href: '#sobre', label: 'Quem é a Andreia' },
+  { href: '#comece-agora', label: 'Investimento' },
+]
 
 const recipes = [
   'Arroz doce low carb',
@@ -87,15 +111,50 @@ const comparison = {
 export function CozinhaNutrideia() {
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-cozinha-brown/60 bg-[#141414]/70 backdrop-blur-md">
-        <Container className="flex h-20 items-center justify-between">
-          <a href="/">
-            <img src={logoCozinha} alt="Cozinha Nutrideia" className="h-11 w-auto lg:h-13" />
-          </a>
-          <Button href={product.checkoutHref} variant="solid" size="sm" className="max-sm:hidden">
-            Quero as receitas
-          </Button>
-        </Container>
+      <header className="fixed inset-x-0 top-0 z-50">
+        <a
+          href="#comece-agora"
+          className="group flex h-9 items-center justify-center gap-2 bg-cta px-4 text-[11px] font-semibold tracking-[0.14em] text-white uppercase sm:text-xs"
+        >
+          <span className="relative flex size-2">
+            <span className="absolute inline-flex size-full animate-ping rounded-full bg-white/70 motion-reduce:animate-none" />
+            <span className="relative inline-flex size-2 rounded-full bg-white" />
+          </span>
+          <span className="sm:hidden">
+            Black Friday · {price.saleShort} em até {blackFriday.installments}x
+          </span>
+          <span className="max-sm:hidden">
+            Black Friday · de <s className="opacity-70">{price.originalShort}</s> por {price.saleShort} em até{' '}
+            {blackFriday.installments}x · acaba em breve
+          </span>
+          <span aria-hidden="true" className="transition-transform group-hover:translate-x-0.5">
+            →
+          </span>
+        </a>
+
+        <div className="border-b border-white/[0.06] bg-[#141414]/80 backdrop-blur-md">
+          <Container className="flex h-18 items-center justify-between gap-8 lg:h-20">
+            <a href="/">
+              <img src={logoCozinha} alt="Cozinha Nutrideia" className="h-10 w-auto lg:h-12" />
+            </a>
+
+            <nav aria-label="Seções" className="hidden lg:block">
+              <ul className="flex items-center gap-9 text-sm text-neutral-300">
+                {navLinks.map((link) => (
+                  <li key={link.href}>
+                    <a href={link.href} className="transition-colors hover:text-white">
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+
+            <Button href={product.checkoutHref} variant="solid" size="sm" className="max-sm:hidden">
+              Quero as receitas
+            </Button>
+          </Container>
+        </div>
       </header>
 
       <main className="pb-20 lg:pb-0">
@@ -143,18 +202,33 @@ function CautionStrip() {
   )
 }
 
-function Guarantee() {
+const trustItems: { icon: LineIconName; label: string }[] = [
+  { icon: 'wallet', label: 'Compra segura' },
+  { icon: 'heart', label: '7 dias de garantia' },
+  { icon: 'zap', label: 'Acesso imediato' },
+]
+
+function Guarantee({ className }: { className?: string }) {
   return (
-    <p className="mt-4 flex items-center justify-center gap-2 text-sm text-neutral-400">
-      <LineIcon name="heart" className="size-4 text-pink" />
-      Compra segura · 7 dias de garantia
-    </p>
+    <ul
+      className={cn(
+        'mt-5 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-[13px] text-neutral-400',
+        className,
+      )}
+    >
+      {trustItems.map((item) => (
+        <li key={item.label} className="flex items-center gap-1.5">
+          <LineIcon name={item.icon} className="size-4 text-pink" />
+          {item.label}
+        </li>
+      ))}
+    </ul>
   )
 }
 
 function Hero() {
   return (
-    <section className="relative isolate flex overflow-hidden bg-[#141414] pt-32 lg:min-h-svh lg:pt-20">
+    <section className="relative isolate flex overflow-hidden bg-[#141414] pt-40 lg:min-h-svh lg:pt-29">
       <RadialGlow className="-top-[30rem] -left-[20rem] -z-10 size-[60rem]" />
 
       <div className="pointer-events-none absolute inset-y-0 right-0 z-0 hidden w-[44%] lg:block">
@@ -170,8 +244,14 @@ function Hero() {
         />
       </div>
 
-      <Container className="relative z-10 flex w-full flex-col items-center gap-10 lg:min-h-[calc(100svh-5rem)] lg:flex-row lg:items-center">
+      <Container className="relative z-10 flex w-full flex-col items-center gap-12 lg:min-h-[calc(100svh-7.25rem)] lg:flex-row lg:items-center">
         <div className="flex w-full max-w-xl flex-col items-center text-center lg:items-start lg:text-left">
+          <p className="mb-7 inline-flex items-center gap-3 text-[11px] font-semibold tracking-[0.3em] text-pink uppercase sm:text-xs">
+            <span aria-hidden="true" className="h-px w-6 bg-pink/60 sm:w-8" />
+            Receitas proteicas
+            <span aria-hidden="true" className="h-px w-6 bg-pink/60 lg:hidden" />
+          </p>
+
           <h1 className="max-w-3xl text-[2.75rem] leading-[1.05] font-medium text-neutral-100 sm:text-5xl lg:text-[4rem] lg:leading-[1]">
             A sua dieta te
             <br />
@@ -188,17 +268,34 @@ function Hero() {
             receitas Nutrideia: além de matar a vontade de um doce, ajudam a nutrir e dar saciedade.
           </p>
 
-          <Button href={product.checkoutHref} size="lg" className="mt-10 max-sm:w-full max-sm:text-[15px]">
-            Quero essas receitas
-          </Button>
-          <Guarantee />
+          <div className="mt-10 flex w-full flex-col items-center gap-4 sm:w-auto lg:flex-row lg:items-center lg:gap-6">
+            <Button href={product.checkoutHref} size="lg" className="max-sm:w-full max-sm:text-[15px]">
+              Quero essas receitas
+            </Button>
+            <a
+              href="#comece-agora"
+              className="text-sm text-neutral-300 underline decoration-pink/50 underline-offset-4 transition-colors hover:text-white"
+            >
+              Black Friday: <strong className="font-semibold text-white">{price.saleShort}</strong> em até{' '}
+              {blackFriday.installments}x
+            </a>
+          </div>
+          <Guarantee className="lg:justify-start" />
         </div>
 
-        <div className="relative mx-auto w-full max-w-md lg:hidden">
+        <div className="relative -mx-6 self-stretch sm:-mx-10 md:-mx-14 lg:hidden">
           <img
             src={andreiaEating}
             alt="Andreia comendo uma fatia de bolo"
-            className="mx-auto h-auto w-full"
+            className="block h-auto max-h-[90svh] w-full object-cover object-[58%_top]"
+          />
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 top-0 h-28 bg-linear-to-b from-[#141414] to-transparent"
+          />
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-linear-to-t from-[#141414]/70 to-transparent"
           />
         </div>
       </Container>
@@ -393,7 +490,7 @@ function Menu() {
 
 function Steps() {
   return (
-    <Section className="theme-cozinha-light bg-[#f7efe7]">
+    <Section id="como-funciona" className="theme-cozinha-light bg-[#f7efe7]">
       <Container className="flex flex-col items-center">
         <div className="flex max-w-3xl flex-col items-center text-center">
           <Badge>Como funciona?</Badge>
@@ -413,7 +510,7 @@ function Steps() {
           {steps.map((step, index) => (
             <li
               key={step.title}
-              className="relative rounded-2xl bg-white p-2 shadow-[0_14px_40px_rgb(89_72_61/0.12)]"
+              className="relative rounded-2xl bg-white p-2 shadow-[0_14px_40px_rgb(89_72_61/0.12)] transition-transform duration-300 hover:-translate-y-1"
             >
               <div className="h-full rounded-xl border border-dashed border-cozinha-brown/30 p-6 sm:p-8">
                 <div className="flex items-center justify-between">
@@ -461,7 +558,7 @@ function Comparison() {
               </h3>
               <ul className="mt-6 flex flex-col gap-4">
                 {comparison.common.map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-[base] text-neutral-400">
+                  <li key={item} className="flex items-start gap-3 text-base text-neutral-400">
                     <CrossIcon className="mt-0.5 size-5 shrink-0 text-neutral-500" />
                     {item}
                   </li>
@@ -499,19 +596,32 @@ function Pricing() {
 
       <Container className="flex flex-col items-center">
         <div className="mb-12 flex max-w-2xl flex-col items-center text-center">
-          <Badge>Comece agora</Badge>
+          <span className="inline-flex items-center gap-2 rounded-full border border-[#d4213f]/50 bg-[#d4213f]/10 px-4 py-1.5 text-[11px] font-bold tracking-[0.28em] text-[#ff6b81] uppercase">
+            <span className="relative flex size-2">
+              <span className="absolute inline-flex size-full animate-ping rounded-full bg-[#ff6b81]/70 motion-reduce:animate-none" />
+              <span className="relative inline-flex size-2 rounded-full bg-[#ff6b81]" />
+            </span>
+            Black Friday
+          </span>
           <h2 className="mt-6 text-3xl leading-[1.25] font-medium text-neutral-100 sm:text-4xl">
             Vem pra Cozinha Nutrideia. Até o bolo de chocolate aqui{' '}
             <GlowText animated={false} className="font-display mt-1 text-[1.3em] leading-none font-normal">
               <ScriptText>tem segredo!</ScriptText>
             </GlowText>
           </h2>
+          <p className="mt-6 max-w-xl text-base leading-[1.6] text-neutral-300 lg:text-lg">
+            Nessa Black Friday, a Cozinha Nutrideia sai de{' '}
+            <s className="text-neutral-400">{price.originalShort}</s> por{' '}
+            <strong className="font-semibold text-white">{price.saleShort}</strong> em até{' '}
+            {blackFriday.installments}x.{' '}
+            <strong className="font-semibold text-white">É por tempo limitado e vai esgotar rápido.</strong>
+          </p>
         </div>
 
-        <div className="w-full max-w-lg overflow-hidden rounded-3xl border border-pink/40 bg-cozinha-brown/25 text-center shadow-[0_0_60px_rgb(var(--glow-rgb)/0.12)]">
+        <div className="w-full max-w-lg overflow-hidden rounded-3xl border border-pink/30 bg-cozinha-brown/20 text-center shadow-[0_30px_80px_rgb(0_0_0/0.45),0_0_60px_rgb(var(--glow-rgb)/0.08)]">
           <GinghamStrip />
 
-          <div className="p-6 sm:p-12">
+          <div className="p-6 sm:p-10">
             <img
               src={cozinhaNutrideia}
               alt={product.name}
@@ -522,7 +632,7 @@ function Pricing() {
               <ScriptText>{product.tagline}</ScriptText>
             </p>
 
-            <ul className="mt-8 flex flex-col gap-3 border-t border-dashed border-pink/30 pt-8 text-left">
+            <ul className="mt-8 flex flex-col gap-3 border-t border-white/10 pt-8 text-left">
               {product.benefits.map((benefit) => (
                 <li key={benefit} className="flex items-start gap-3 text-base leading-normal text-neutral-200">
                   <CheckIcon className="mt-0.5 size-5 shrink-0 text-pink" />
@@ -531,19 +641,38 @@ function Pricing() {
               ))}
             </ul>
 
-            <p className="mt-10 text-xs font-medium tracking-widest text-neutral-400 uppercase">
-              Investimento
-            </p>
-            <p className="mt-2 text-[2.5rem] leading-none font-semibold text-white sm:text-5xl">
-              {formattedPrice}
-            </p>
-            <p className="mt-3 text-sm text-neutral-400">
-              Pagamento único. Acesso imediato.
-            </p>
+            <div className="relative mt-10 overflow-hidden rounded-2xl border border-[#d4213f]/60 bg-[#0d0d0d] shadow-[0_0_40px_rgb(212_33_63/0.18)]">
+              <div className="flex items-center justify-between gap-3 bg-[#d4213f] px-4 py-2.5 text-white sm:px-5">
+                <span className="text-[11px] font-bold tracking-[0.2em] whitespace-nowrap uppercase sm:tracking-[0.28em]">
+                  <span className="max-sm:hidden">Oferta </span>Black Friday
+                </span>
+                <span className="rounded-full bg-white px-2.5 py-0.5 text-[11px] font-bold text-[#a40b26]">
+                  -{discountPercent}%
+                </span>
+              </div>
 
-            <Button href={product.checkoutHref} size="lg" className="mt-8 w-full max-sm:text-[15px]">
-              Quero começar agora
-            </Button>
+              <div className="px-5 pt-7 pb-6 sm:px-8">
+                <p className="text-sm text-neutral-400">
+                  De <s className="decoration-[#d4213f] decoration-2">{price.original}</s> por apenas
+                </p>
+                <p className="mt-2 text-[3.25rem] leading-none font-semibold tracking-tight text-white sm:text-6xl">
+                  {price.sale}
+                </p>
+                <p className="mt-3 text-base text-neutral-200">
+                  ou em até <strong className="font-semibold text-white">{blackFriday.installments}x</strong>
+                </p>
+
+                <p className="mt-6 flex items-center justify-center gap-2 rounded-lg bg-[#d4213f]/12 px-4 py-2.5 text-[13px] font-semibold text-[#ff8a9b]">
+                  <LineIcon name="zap" className="size-4 shrink-0" />
+                  Tempo limitado · vai esgotar rápido
+                </p>
+
+                <Button href={product.checkoutHref} size="lg" className="mt-6 w-full max-sm:text-[15px]">
+                  Garantir por {price.saleShort}
+                </Button>
+                <Guarantee />
+              </div>
+            </div>
 
             <div className="mt-8 flex flex-col items-center rounded-2xl border border-dashed border-pink/40 bg-pink/[0.06] p-6 text-center">
               <span className="flex size-12 items-center justify-center rounded-full bg-pink/15 text-pink">
@@ -584,7 +713,12 @@ function FinalCall() {
         <Button href={product.checkoutHref} size="lg" className="mt-10 max-sm:w-full max-sm:text-[15px]">
           Quero aprender com a Nutrideia!
         </Button>
-        <Guarantee />
+        <p className="mt-4 text-sm text-neutral-400">
+          Black Friday: de <s>{price.originalShort}</s> por{' '}
+          <strong className="font-semibold text-white">{price.saleShort}</strong> em até{' '}
+          {blackFriday.installments}x
+        </p>
+        <Guarantee className="mt-3" />
       </Container>
     </Section>
   )
@@ -594,7 +728,7 @@ function AboutAndreia() {
   return (
     <Section id="sobre" className="theme-cozinha-light bg-[#f7efe7]">
       <Container className="grid items-center gap-16 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
-        <figure className="relative mx-auto w-full max-w-sm rotate-2 bg-white p-4 pb-16 shadow-[0_24px_60px_rgb(89_72_61/0.22)] lg:order-2">
+        <figure className="relative order-2 mx-auto w-full max-w-sm rotate-2 bg-white p-4 pb-16 shadow-[0_24px_60px_rgb(89_72_61/0.22)]">
           <span
             aria-hidden="true"
             className="absolute -top-3 left-1/2 h-7 w-28 -translate-x-1/2 -rotate-3 bg-[#e6c5aa]/80"
@@ -610,7 +744,7 @@ function AboutAndreia() {
           </figcaption>
         </figure>
 
-        <div className="flex flex-col items-start lg:order-1">
+        <div className="order-1 flex flex-col items-start">
           <Badge>Quem cozinha com você</Badge>
 
           <h2 className="mt-6 text-3xl leading-[1.25] font-medium text-[#141414] sm:text-4xl lg:text-[2.75rem]">
@@ -646,6 +780,19 @@ function AboutAndreia() {
             </p>
           </div>
 
+          <dl className="mt-10 grid w-full max-w-[34rem] grid-cols-3 divide-x divide-cozinha-brown/15 border-y border-cozinha-brown/15 py-5 text-center">
+            {[
+              { value: '2017', label: 'Criação do método' },
+              { value: 'Nutrição', label: 'Formação' },
+              { value: 'Milhares', label: 'De pessoas ajudadas' },
+            ].map((stat) => (
+              <div key={stat.label} className="flex flex-col-reverse gap-1 px-2">
+                <dt className="text-[11px] tracking-wide text-cozinha-brown/80 sm:text-xs">{stat.label}</dt>
+                <dd className="text-lg font-semibold text-[#141414] sm:text-xl">{stat.value}</dd>
+              </div>
+            ))}
+          </dl>
+
           <Button href={product.checkoutHref} size="lg" className="mt-10 max-sm:w-full max-sm:text-[15px]">
             <span className="sm:hidden">Quero aprender com você</span>
             <span className="max-sm:hidden">Quero aprender com a Nutrideia</span>
@@ -660,11 +807,20 @@ function MobileBuyBar() {
   return (
     <div className="fixed inset-x-0 bottom-0 z-50 border-t border-cozinha-brown/60 bg-[#141414]/85 backdrop-blur-md lg:hidden">
       <Container className="flex h-20 items-center justify-between gap-4">
-        <div className="flex flex-col">
-          <span className="text-xs text-neutral-400">{product.name}</span>
-          <span className="text-lg font-semibold text-white">{formattedPrice}</span>
+        <div className="flex min-w-0 flex-col whitespace-nowrap">
+          <span className="text-[10px] font-bold tracking-[0.2em] text-[#ff6b81] uppercase">
+            Black Friday · -{discountPercent}%
+          </span>
+          <span className="flex items-baseline gap-2">
+            <s className="text-xs text-neutral-500">{price.originalShort}</s>
+            <span className="text-lg font-semibold text-white">{price.saleShort}</span>
+            <span className="text-xs text-neutral-400">
+              <span className="max-[400px]:hidden">em até </span>
+              {blackFriday.installments}x
+            </span>
+          </span>
         </div>
-        <Button href={product.checkoutHref} variant="solid" size="sm">
+        <Button href={product.checkoutHref} variant="solid" size="sm" className="shrink-0 px-5 whitespace-nowrap">
           Quero começar
         </Button>
       </Container>

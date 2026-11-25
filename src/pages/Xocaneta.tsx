@@ -26,6 +26,7 @@ import { results } from '../data/results'
 import {
   xocanetaComparison,
   xocanetaCosts,
+  xocanetaDiscountPercent,
   xocanetaFormatted,
   xocanetaMarquee,
   xocanetaOffer,
@@ -608,10 +609,15 @@ function Pricing() {
           </div>
 
           <div className="rounded-b-3xl bg-[#fce8f2] px-6 pt-8 pb-10 text-center text-black sm:px-10">
-            <p className="text-xs font-medium tracking-widest text-black/60 uppercase">
+            <p className="flex items-center justify-center gap-2 text-xs font-medium tracking-widest text-black/60 uppercase">
               Condição especial
+              <span className="rounded-full bg-black px-2.5 py-0.5 text-[11px] font-black tracking-normal text-[#fce8f2]">
+                -{xocanetaDiscountPercent}%
+              </span>
             </p>
-            <p className="mt-2 text-sm text-black/45 line-through">{xocanetaFormatted.original}</p>
+            <p className="mt-2 text-sm text-black/45">
+              De <s className="decoration-black/60">{xocanetaFormatted.original}</s> por apenas
+            </p>
             <p className="mt-1 text-5xl leading-none font-black italic sm:text-6xl">
               {xocanetaFormatted.sale}
             </p>
@@ -620,7 +626,12 @@ function Pricing() {
             </p>
             <p className="mt-2 text-xs text-black/55">Menos do que um mês de caneta.</p>
 
-            <Button href={checkout} size="lg" className="mt-8 w-full max-sm:text-[15px]">
+            <p className="mt-6 flex items-center justify-center gap-2 rounded-lg bg-black/[0.07] px-3 py-2.5 text-xs font-bold whitespace-nowrap text-black sm:text-[13px]">
+              <LineIcon name="zap" className="size-4 shrink-0" />
+              Tempo limitado · acaba em breve
+            </p>
+
+            <Button href={checkout} size="lg" className="mt-6 w-full max-sm:text-[15px]">
               Garantir minha vaga
             </Button>
             <Guarantee />
@@ -889,7 +900,7 @@ function AboutAndreia() {
   return (
     <Section id="sobre" className="bg-[#fdfaf0]">
       <Container className="grid items-center gap-16 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
-        <figure className="relative mx-auto w-full max-w-sm lg:order-2">
+        <figure className="relative order-2 mx-auto w-full max-w-sm">
           <span
             aria-hidden="true"
             className="absolute -right-4 -bottom-4 -z-10 size-full rounded-3xl bg-[#fce8f2]"
@@ -905,7 +916,7 @@ function AboutAndreia() {
           </figcaption>
         </figure>
 
-        <div className="flex flex-col items-start lg:order-1">
+        <div className="order-1 flex flex-col items-start">
           <Badge marker="pen">Quem guia a jornada</Badge>
           <h2 className="mt-6 text-3xl leading-[1.12] font-medium sm:text-4xl lg:text-[2.6rem]">
             Eu já fui obesa, diabética e hipertensa. E mudei tudo isso{' '}
@@ -965,7 +976,9 @@ function MobileBuyBar() {
     <div className="fixed inset-x-0 bottom-0 z-50 border-t border-white/10 bg-black/90 backdrop-blur-md md:hidden">
       <Container className="flex h-[4.5rem] items-center justify-between gap-3">
         <div className="flex min-w-0 flex-col">
-          <span className="text-[10px] tracking-[0.18em] text-[#fce8f2] uppercase">Black Friday</span>
+          <span className="text-[10px] tracking-[0.18em] text-[#fce8f2] uppercase">
+            Black Friday · -{xocanetaDiscountPercent}%
+          </span>
           <span className="text-lg font-black text-[#fdfaf0] italic">
             <span className="mr-1.5 text-xs font-semibold text-[#fdfaf0]/40 line-through">
               {xocanetaFormatted.original}
@@ -977,7 +990,7 @@ function MobileBuyBar() {
           href={checkout}
           variant="solid"
           size="sm"
-          className="bg-[#fdfaf0]! text-black! hover:bg-[#fce8f2]!"
+          className="shrink-0 bg-[#fdfaf0]! whitespace-nowrap text-black! hover:bg-[#fce8f2]!"
         >
           Quero o choque
         </Button>
