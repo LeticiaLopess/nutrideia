@@ -17,7 +17,7 @@ const whatsappNumber = '5521975719527'
 const whatsappLink = (message: string) => `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
 
 const whatsappHref = whatsappLink('Olá! Vi o site do HydroPower e quero saber mais.')
-const instagramHref = 'https://www.instagram.com/ojcnutrition'
+const instagramHref = 'https://www.instagram.com/ojejumcura'
 
 const formatBRL = (value: number) =>
   value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
@@ -115,14 +115,28 @@ const navLinks = [
 /* ---------------------------------- page ---------------------------------- */
 
 export function Hydropower() {
-  useGSAP(() => {
-    ScrollTrigger.create({
-      trigger: '#jejum',
-      start: 'top 85%',
-      end: 'max',
-      toggleClass: { targets: '[data-buybar]', className: 'is-visible' },
-    })
-  })
+  // mobile buy bar: visible whenever the hero is behind us, all the way to the end of the page
+  useEffect(() => {
+    const bar = document.querySelector('[data-buybar]')
+    const marker = document.getElementById('jejum')
+    if (!bar || !marker) return
+    let frame = 0
+    const update = () => {
+      frame = 0
+      bar.classList.toggle('is-visible', marker.getBoundingClientRect().top < window.innerHeight * 0.85)
+    }
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update)
+    }
+    update()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+      if (frame) cancelAnimationFrame(frame)
+    }
+  }, [])
 
   return (
     <>
@@ -400,7 +414,7 @@ function Hero() {
               alt="Pote de HydroPower, OJC Nutrition, com 60 cápsulas"
               fetchPriority="high"
               className={cn(
-                'absolute inset-0 size-full object-contain drop-shadow-[0_40px_60px_rgb(0_0_0/0.7)] transition-opacity duration-700',
+                'absolute inset-0 size-full object-contain transition-opacity duration-500',
                 ready && 'opacity-0',
               )}
             />
@@ -650,16 +664,16 @@ function HowToUse() {
           {steps.map((step, i) => (
             <li
               key={step.time}
-              className="relative overflow-hidden rounded-3xl bg-white p-8 shadow-[0_24px_60px_rgb(28_23_18/0.08)] sm:p-10"
+              className="relative flex flex-col items-start overflow-hidden rounded-3xl bg-white p-8 shadow-[0_24px_60px_rgb(28_23_18/0.08)] sm:p-10"
             >
               <span className="absolute top-8 right-8 flex size-10 items-center justify-center rounded-full border border-[#c9a067]/40 text-sm font-medium text-[#8a6334] sm:top-10 sm:right-10">
                 {String(i + 1).padStart(2, '0')}
               </span>
               <p className="text-xs font-medium tracking-[0.28em] text-[#8a6334] uppercase">{step.time}</p>
               <p className="mt-4 text-2xl font-semibold tracking-tight sm:text-3xl">{step.dose}</p>
-              <p className="mt-3 text-[15px] leading-[1.6] text-[#5b4c3c]">{step.text}</p>
+              <p className="mt-3 mb-7 text-[15px] leading-[1.6] text-[#5b4c3c]">{step.text}</p>
               <div
-                className="mt-7 inline-flex items-center gap-3 rounded-full border border-[#c9a067]/30 bg-linear-to-b from-[#fbf6ee] to-[#f1e6d4] py-2 pr-4 pl-3"
+                className="mt-auto inline-flex items-center gap-3 rounded-full border border-[#c9a067]/30 bg-linear-to-b from-[#fbf6ee] to-[#f1e6d4] py-2 pr-4 pl-3"
                 aria-hidden="true"
               >
                 <span className="flex items-center gap-1.5">
@@ -865,7 +879,7 @@ function Footer() {
             +55 21 97571-9527
           </a>
           <a href={instagramHref} target="_blank" rel="noopener noreferrer" className="hover:text-[#f3ece2]">
-            @ojcnutrition
+            @ojejumcura
           </a>
         </div>
         <div className="flex flex-col gap-2 text-sm text-[#7d756b]">
