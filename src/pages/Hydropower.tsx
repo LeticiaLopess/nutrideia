@@ -583,11 +583,11 @@ function Formula() {
             ))}
           </ul>
 
-          <p className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-medium tracking-[0.22em] text-[#e9d3a9] uppercase">
+          <p className="mt-8 flex flex-col items-center gap-3 text-center text-xs font-medium tracking-[0.22em] text-[#e9d3a9] uppercase sm:flex-row sm:flex-wrap sm:gap-x-4 sm:gap-y-2 sm:text-left">
             <span>Zero açúcar</span>
-            <span aria-hidden="true" className="text-[#d6ad72]">✦</span>
+            <span aria-hidden="true" className="text-[#d6ad72] max-sm:hidden">✦</span>
             <span>Zero calorias</span>
-            <span aria-hidden="true" className="text-[#d6ad72]">✦</span>
+            <span aria-hidden="true" className="text-[#d6ad72] max-sm:hidden">✦</span>
             <span>Não quebra o jejum</span>
           </p>
         </div>
