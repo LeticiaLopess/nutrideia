@@ -2,19 +2,8 @@ import * as THREE from 'three'
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js'
 import { BODY_PROFILE, BODY_TOP, LID_PROFILE, POT_HEIGHT } from './potProfile'
 
-/**
- * 3D HydroPower pot for the hero.
- * Scroll progress (0 → 1) drives the choreography:
- *   0.00–0.40  the pot turns once in 3D while it settles down
- *   0.28–0.55  the lid unscrews smoothly
- *   0.50–0.75  the lid floats away and the pot leans towards the viewer
- *   0.50–0.80  capsules pop out of the jar and fall
- *   0.78–1.00  the pot drops out of the frame
- */
-
 export type PotScene = {
   setProgress: (p: number) => void
-  /** Pixel rect (relative to the canvas) where the pot should sit at rest. */
   setFocus: (rect: { centerY: number; height: number }) => void
   resize: () => void
   setActive: (active: boolean) => void
@@ -32,7 +21,6 @@ const smooth = (a: number, b: number, x: number) => {
 }
 const easeInOut = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2)
 
-/* deterministic pseudo-random so the spill looks the same on every visit */
 function rng(seed: number) {
   let s = seed
   return () => {
@@ -66,7 +54,6 @@ export function createPotScene(canvas: HTMLCanvasElement, labelUrl: string, onRe
   const camera = new THREE.PerspectiveCamera(26, 1, 0.1, 100)
   camera.position.set(0, 0, 8)
 
-  /* lights */
   scene.add(new THREE.AmbientLight(0xffffff, 0.25))
   const key = new THREE.DirectionalLight(0xfff3e0, 2.2)
   key.position.set(3, 4, 5)
@@ -78,10 +65,9 @@ export function createPotScene(canvas: HTMLCanvasElement, labelUrl: string, onRe
   rim2.position.set(4, -1, -2)
   scene.add(rim2)
 
-  /* ------------------------------ geometry ------------------------------ */
-  const root = new THREE.Group() // positioned/scaled to the focus rect
+  const root = new THREE.Group()
   scene.add(root)
-  const pot = new THREE.Group() // animated
+  const pot = new THREE.Group()
   root.add(pot)
 
   const disposables: { dispose: () => void }[] = [renderer, pmrem, envTexture]
@@ -90,7 +76,6 @@ export function createPotScene(canvas: HTMLCanvasElement, labelUrl: string, onRe
     return o
   }
 
-  // body
   const bodyGeo = track(
     new THREE.LatheGeometry(
       BODY_PROFILE.map(([r, y]) => new THREE.Vector2(r, y - HALF)),
@@ -117,7 +102,6 @@ export function createPotScene(canvas: HTMLCanvasElement, labelUrl: string, onRe
   const body = new THREE.Mesh(bodyGeo, bodyMat)
   pot.add(body)
 
-  // open mouth: dark inner wall, floor and a few capsules resting inside
   const neckR = BODY_PROFILE[BODY_PROFILE.length - 1][0]
   const darkMat = track(new THREE.MeshStandardMaterial({ color: 0x060606, roughness: 0.9, side: THREE.DoubleSide }))
   const inner = new THREE.Mesh(track(new THREE.CylinderGeometry(neckR * 0.94, neckR * 0.94, 0.3, 64, 1, true)), darkMat)
@@ -156,7 +140,6 @@ export function createPotScene(canvas: HTMLCanvasElement, labelUrl: string, onRe
     pot.add(c)
   }
 
-  // lid (pivot on the seam)
   const lid = new THREE.Group()
   lid.position.y = MOUTH_Y
   pot.add(lid)
@@ -181,7 +164,6 @@ export function createPotScene(canvas: HTMLCanvasElement, labelUrl: string, onRe
   lidUnder.position.y = 0.003
   lid.add(lidUnder)
 
-  // flying capsules
   const flying = new THREE.InstancedMesh(capsuleGeo, capsuleMat, CAPSULE_COUNT)
   flying.instanceMatrix.setUsage(THREE.DynamicDrawUsage)
   flying.frustumCulled = false
@@ -197,7 +179,6 @@ export function createPotScene(canvas: HTMLCanvasElement, labelUrl: string, onRe
     start: new THREE.Vector3(),
   }))
 
-  /* ----------------------------- choreography ----------------------------- */
   const pose = (p: number, idle: number, target: THREE.Object3D) => {
     const settle = smooth(0, 0.4, p)
     const lean = smooth(0.42, 0.7, p)
@@ -238,14 +219,12 @@ export function createPotScene(canvas: HTMLCanvasElement, labelUrl: string, onRe
     pose(p, idle, pot)
     pot.position.y += Math.sin(time * 1.1) * 0.035 * (1 - smooth(0, 0.1, p))
 
-    // lid: unscrew, then float away
     const unscrew = easeInOut(smooth(0.28, 0.55, p))
     const away = easeInOut(smooth(0.5, 0.75, p))
     lid.rotation.set(-away * 0.9, -unscrew * Math.PI * 2.5, away * 0.7)
     lid.position.set(-away * 1.45, MOUTH_Y + unscrew * 0.16 + away * 0.2, -away * 0.7)
     lid.scale.setScalar(1 - away * 0.12)
 
-    // capsules
     const T = 1.4
     const g = -7
     for (let i = 0; i < CAPSULE_COUNT; i++) {
@@ -283,10 +262,8 @@ export function createPotScene(canvas: HTMLCanvasElement, labelUrl: string, onRe
     if (!w || !h) return
     renderer.setSize(w, h, false)
     camera.aspect = w / h
-    // keep a little margin: the pot leans and turns, so its silhouette grows a bit
     const fh = (focus.height || h * 0.45) * (w < 1024 ? 0.86 : 0.9)
     const cy = focus.height ? focus.centerY : h / 2
-    // pot (POT_HEIGHT units) must span fh pixels at the origin plane
     const visibleH = (POT_HEIGHT * h) / fh
     camera.position.z = visibleH / (2 * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)))
     camera.updateProjectionMatrix()

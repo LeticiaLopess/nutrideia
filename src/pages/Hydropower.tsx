@@ -2,6 +2,7 @@ import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
+import deborah from '../assets/images/hydropower/deborah-antes-depois.webp'
 import flor from '../assets/images/hydropower/flor.png'
 import poteRotulo from '../assets/images/hydropower/pote-rotulo.webp'
 import pote from '../assets/images/hydropower/pote.webp'
@@ -10,8 +11,6 @@ import { cn } from '../lib/cn'
 import type { PotScene } from './hydropower/potScene'
 
 gsap.registerPlugin(useGSAP, ScrollTrigger)
-
-/* ---------------------------------- data ---------------------------------- */
 
 const whatsappNumber = '5521975719527'
 const whatsappLink = (message: string) => `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
@@ -112,10 +111,7 @@ const navLinks = [
   { href: '#ofertas', label: 'Ofertas' },
 ]
 
-/* ---------------------------------- page ---------------------------------- */
-
 export function Hydropower() {
-  // mobile buy bar: visible whenever the hero is behind us, all the way to the end of the page
   useEffect(() => {
     const bar = document.querySelector('[data-buybar]')
     const marker = document.getElementById('jejum')
@@ -157,8 +153,6 @@ export function Hydropower() {
     </>
   )
 }
-
-/* ------------------------------- primitives ------------------------------- */
 
 function Container({ className, children }: { className?: string; children: ReactNode }) {
   return <div className={cn('mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-12', className)}>{children}</div>
@@ -231,8 +225,6 @@ function StaticCapsule({ className, style }: { className?: string; style?: CSSPr
   return <span aria-hidden="true" className={cn('hydro-capsule block', className)} style={style} />
 }
 
-/* --------------------------------- header --------------------------------- */
-
 function Header() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/[0.06] bg-[#0b0a09]/70 backdrop-blur-xl">
@@ -260,8 +252,6 @@ function Header() {
   )
 }
 
-/* ---------------------------------- hero ---------------------------------- */
-
 function Hero() {
   const root = useRef<HTMLElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -269,7 +259,6 @@ function Hero() {
   const sceneRef = useRef<PotScene | null>(null)
   const [ready, setReady] = useState(false)
 
-  // 3D scene (loaded on demand; the static photo stays as fallback)
   useEffect(() => {
     const section = root.current
     const canvas = canvasRef.current
@@ -286,7 +275,7 @@ function Hero() {
       try {
         scene = createPotScene(canvas, poteRotulo, () => !cancelled && setReady(true))
       } catch {
-        return // no WebGL: keep the photo
+        return
       }
       sceneRef.current = scene
 
@@ -297,7 +286,6 @@ function Hero() {
       }
       measure()
 
-      // re-measure whenever the slot changes (e.g. when the web fonts finish loading)
       const ro = new ResizeObserver(measure)
       ro.observe(section)
       ro.observe(slot)
@@ -355,7 +343,6 @@ function Hero() {
       ref={root}
       className="relative isolate h-svh min-h-[620px] overflow-hidden pt-16 lg:min-h-[680px] lg:pt-18"
     >
-      {/* backdrop */}
       <div aria-hidden="true" className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_55%,#2c2015_0%,#0b0a09_62%)]" />
         <div className="hydro-grain absolute inset-0 opacity-[0.06] [mask-image:radial-gradient(circle_at_50%_55%,#000,transparent_55%)]" />
@@ -368,7 +355,6 @@ function Hero() {
         className="pointer-events-none absolute top-1/2 left-1/2 -z-[5] size-[min(85vw,36rem)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgb(214_173_114/0.3)_0%,rgb(214_173_114/0.07)_45%,transparent_70%)] opacity-60 blur-2xl"
       />
 
-      {/* 3D pot */}
       <canvas
         ref={canvasRef}
         aria-hidden="true"
@@ -379,7 +365,6 @@ function Hero() {
       />
 
       <Container className="relative grid h-full grid-rows-[auto_minmax(0,1fr)_auto] justify-items-center pt-5 pb-12 text-center lg:max-w-[108rem] lg:py-6 xl:px-20 2xl:px-28 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:grid-rows-[minmax(0,1fr)] lg:items-center lg:gap-10 xl:gap-16">
-        {/* headline */}
         <div className="relative z-40 flex flex-col items-center lg:items-start lg:justify-self-start lg:text-left">
           <div data-intro>
             <Eyebrow>A força do jejum</Eyebrow>
@@ -406,7 +391,6 @@ function Hero() {
           </ul>
         </div>
 
-        {/* slot where the pot rests (also the static fallback) */}
         <div className="relative flex h-full min-h-0 w-full items-center justify-center pt-4 pb-10 lg:w-auto lg:py-14">
           <div ref={slotRef} className="relative aspect-[606/1107] h-full max-h-[26rem] lg:max-h-[40rem]">
             <img
@@ -421,7 +405,6 @@ function Hero() {
           </div>
         </div>
 
-        {/* supporting copy */}
         <div className="relative z-40 flex w-full flex-col items-center lg:max-w-sm lg:items-start lg:justify-self-end lg:text-left">
           <p
             data-intro
@@ -457,8 +440,6 @@ function Hero() {
     </section>
   )
 }
-
-/* -------------------------------- sections -------------------------------- */
 
 function Fasting() {
   const pillars = [
@@ -701,18 +682,40 @@ function HowToUse() {
 
 function Testimonial() {
   return (
-    <section id="depoimento" className="relative overflow-hidden py-24 lg:py-36">
-      <Container className="flex flex-col items-center text-center">
-        <span aria-hidden="true" className="hydro-serif hydro-gold-text text-8xl leading-none">
-          “
-        </span>
-        <blockquote className="hydro-serif -mt-6 max-w-3xl text-[1.9rem] leading-[1.25] text-[#f3ece2] sm:text-[2.6rem]">
-          Eu não estava conseguindo fazer jejum sem ele. Hoje faço facilmente, sem fome, sem dor de
-          cabeça e sem cansaço. Me sinto com muita disposição.
-        </blockquote>
-        <p className="mt-8 text-xs tracking-[0.3em] text-[#a39a8e] uppercase">
-          Deborah <span className="text-[#d6ad72]">·</span> cliente HydroPower
-        </p>
+    <section id="depoimento" className="relative overflow-hidden py-24 lg:py-32">
+      <Container className="grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+        <figure className="hydro-gold-bg relative mx-auto w-full max-w-md rounded-[1.75rem] p-px shadow-[0_30px_80px_rgb(0_0_0/0.55)] lg:max-w-none">
+          <div className="relative overflow-hidden rounded-[calc(1.75rem-1px)]">
+            <img
+              src={deborah}
+              alt="Deborah, cliente HydroPower, em fotos de antes e depois"
+              loading="lazy"
+              className="aspect-square w-full object-cover"
+            />
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-between bg-linear-to-t from-black/70 to-transparent px-4 pt-16 pb-4">
+              <span className="rounded-full bg-[#0b0a09]/80 px-3 py-1 text-[11px] font-medium tracking-[0.25em] text-[#e9d3a9] uppercase backdrop-blur">
+                Antes
+              </span>
+              <span className="hydro-gold-bg rounded-full px-3 py-1 text-[11px] font-semibold tracking-[0.25em] text-[#1a120a] uppercase">
+                Depois
+              </span>
+            </div>
+          </div>
+        </figure>
+
+        <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
+          <Eyebrow>Depoimento</Eyebrow>
+          <span aria-hidden="true" className="hydro-serif hydro-gold-text mt-6 text-8xl leading-none">
+            “
+          </span>
+          <blockquote className="hydro-serif -mt-8 max-w-2xl text-[1.9rem] leading-[1.25] text-[#f3ece2] sm:text-[2.4rem]">
+            Eu não estava conseguindo fazer jejum sem ele. Hoje faço facilmente, sem fome, sem dor de
+            cabeça e sem cansaço. Me sinto com muita disposição.
+          </blockquote>
+          <p className="mt-8 text-xs tracking-[0.3em] text-[#a39a8e] uppercase">
+            Deborah <span className="text-[#d6ad72]">·</span> cliente HydroPower
+          </p>
+        </div>
       </Container>
     </section>
   )
