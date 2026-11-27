@@ -21,6 +21,7 @@ export default defineConfig({
         terapia: fileURLToPath(new URL('./terapia-emagrecimento/index.html', import.meta.url)),
         catalogo: fileURLToPath(new URL('./catalogo-delivery/index.html', import.meta.url)),
         xocaneta: fileURLToPath(new URL('./xocaneta/index.html', import.meta.url)),
+        hydropower: fileURLToPath(new URL('./hydropower/index.html', import.meta.url)),
       },
     },
   },
