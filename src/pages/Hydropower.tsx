@@ -734,7 +734,7 @@ function Offers() {
           Escolha o seu <span className="hydro-gold-text">HydroPower.</span>
         </h2>
         <p className="mt-5 text-center text-base font-light text-[#a39a8e]">
-          60 cápsulas por pote · 500 mg cada cápsula
+          60 cápsulas por pote · 750 mg cada cápsula
         </p>
 
         <ul className="mt-16 grid w-full max-w-6xl items-stretch gap-6 lg:grid-cols-3">
@@ -873,7 +873,7 @@ function Footer() {
         <div className="flex flex-col gap-4">
           <Logo />
           <p className="max-w-xs text-sm leading-[1.6] text-[#7d756b]">
-            Suplemento alimentar em cápsulas à base de minerais. 60 cápsulas · 500 mg cada cápsula.
+            Suplemento alimentar em cápsulas à base de minerais. 60 cápsulas · 750 mg cada cápsula.
           </p>
         </div>
         <div className="flex flex-col gap-2 text-sm text-[#a39a8e]">
